@@ -1,0 +1,228 @@
+@import "../../style/weui.wxss";
+page{
+  padding-bottom:70px;
+}
+.tip{
+  padding:10px;
+}
+.tip .zan-cell__desc {
+  line-height: 1.8;
+}
+.weui-panel,.zan-panel{
+  margin-top:5px;
+}
+.weui-panel__hd{
+  padding:0;
+}
+swiper{
+  height:240px;
+}
+.tick{
+  width:16px;
+  height:16px;
+  position:relative;
+  top:3px;
+  margin-right:2px;
+}
+.detail-box image{
+  width: 100%;
+}
+.weui-media-box{
+  position:relative;
+  box-sizing: border-box;
+}
+.weui-media-box .zan-btn{
+  position:absolute;
+  right:15px;
+  top:15px;
+  height: 20px;
+  border: none;
+  line-height: 20px;
+}
+.detail-box .share{
+  width:15px;
+  height: 15px;
+  position:relative;
+  top:3px;
+}
+
+.weui-media-box__desc,.weui-media-box__info__meta{
+  color:#666;
+}
+.weui-media-box__info__meta:first-child{
+  padding-right: 0.1em;
+}
+.weui-loadmore_line{
+  margin-bottom: 0;
+}
+.particulars{
+  padding:5px 15px;
+  text-align: center;
+  margin:0 auto 1em;
+  font-size:13px;
+  color:#666;
+}
+
+.add-box{
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height:80rpx;
+  background: #fff;
+}
+.price-box,.btn{
+  width: 50%;
+}
+.price-box{
+  display:flex; 
+  border-top:1rpx solid #ddd;
+}
+.price-box>view,.price-box>text{
+ flex-grow:0.5; 
+ text-align: center;
+ font-size:28rpx; 
+}
+.price-box>view>view{
+  position:relative;
+  top:-7px;
+  color:#666;
+}
+.price-box>text{
+  height:80rpx;
+  line-height: 80rpx;
+  color:#f44;
+  border-right:1rpx solid #ddd;
+  box-sizing: border-box;
+}
+.price-box image{
+  width:30rpx;
+  height: 30rpx;
+  margin-top:3px;
+}
+
+.btn>button{
+  border-radius: 0px;
+  border:none;
+}
+.zan-btn{
+  height:80rpx;
+  line-height: 80rpx;
+  flex-grow: 0.5;
+  font-size: 28rpx;
+} 
+
+.add-cart{
+  width:70rpx;
+  height:70rpx;
+  font-size: 30px;
+  background:#f44;
+  color:#fff;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 50%;
+  position: fixed;
+  right:30rpx;
+  bottom:150rpx;
+  box-shadow: 0 0 10px 3px #f44;
+}
+
+/* 弹出层内容 */
+.dialog-box{
+  padding:15px 0 0 0;
+}
+.zan-card__right-col{
+  color:#f44;
+}
+.close{
+  width:50rpx;
+  height: 50rpx;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+
+/* 下单 确定按钮*/
+.order{
+  width:100%;
+  height:80rpx;
+  color:#fff;
+  text-align: center;
+  line-height: 80rpx;
+  background: #f44;
+  font-size:30rpx;
+  margin:15px 0 0 0;
+}
+
+/* 购买数量按钮 */
+.zan-card__detail>view:nth-child(2){
+  margin:15px 0 0 0;
+}
+.zan-card__detail>view:nth-child(2) text{
+  font-size: 26rpx;
+}
+.zan-quantity {
+  color: #666;
+  display: inline-block;
+  margin:0 10px 0 0;
+}
+.zan-quantity view {
+  display: inline-block;
+  height: 64rpx;
+  width: 80rpx;
+  line-height: 36rpx;
+  padding: 5px 0;
+  text-align: center;
+  min-width: 80rpx;
+  box-sizing: border-box;
+  vertical-align: middle;
+  font-size: 24rpx;
+  border: 1rpx solid #999;
+}
+.zan-quantity .zan-quantity__minus {
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+}
+.zan-quantity .zan-quantity__text {
+  border: 1rpx solid #999;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  height: 61rpx;
+  width: 80rpx;
+  font-size: 24rpx;
+  line-height: 60rpx;
+}
+.zan-quantity .zan-quantity__plus {
+  border-left: none;
+  border-radius: 0 2px 2px 0;
+}
+
+/* 按钮禁用的样式 */
+.zan-quantity .zan-quantity--disabled {
+  background: #f8f8f8;
+  color: #bbb;
+  border-color: #e8e8e8;
+}
+
+.zan-panel .tick{
+  width:32rpx;
+  height:32rpx;
+  position:relative;
+  top:3px;
+  margin:0 3px;
+}
+
+.weui-badge{
+  font-size: 24rpx;
+  margin-bottom:3px;
+}
+
+.add-tip{
+  font-size: 24rpx;
+  width:35rpx;
+  text-align: center;
+  position:fixed;
+  right:45rpx;
+  bottom:220rpx;
+}

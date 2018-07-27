@@ -1,0 +1,157 @@
+/* pages/cart/cart.wxss */
+@import "../../style/weui.wxss";
+page{
+  background:#f0f0f0;
+  padding-bottom:80px;
+}
+.zan-panel{
+  margin-top:5px;
+}
+
+/* 没有商品时购物车列表样式 */
+.cart-box{
+  text-align: center;
+  position: absolute;
+  top:80px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 14px;
+}
+.cart-box>image{
+  width:300rpx;
+  height: 300rpx;
+}
+.cart-box>view{
+  margin:15px 0 0 0;
+}
+.weui-btn{
+  margin: 70px 0 0 0
+}
+button[size=mini]{
+  padding:0.3em 1.34em;
+}
+
+
+/* 有商品时购物车列表样式 */
+.zan-cell .zan-cell__ft{
+  font-size: 12px;
+}
+.content .weui-cell__bd{
+  display:flex;
+}
+ .zan-card__detail-row{
+  margin-top:8px;
+  margin-bottom:8px;
+} 
+.weui-cell__bd>view>icon{
+  position: relative;
+  top:34px;
+}
+.weui-cell__bd .zan-card{
+  flex-grow: 0.9;
+  display:inline-block;
+  padding:0 5px;
+}
+
+.weui-check__label{
+  padding:0;
+}
+.box{
+  background: #fff;
+}
+.price{
+  color:#e01306;
+}
+
+.zan-card__left-col{
+  font-size:12px;
+}
+
+
+.touch-item {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom:5px;
+  background:#fafafa;
+}
+.content {
+  width: 100%;
+  padding:8px 5px 5px;
+  line-height: 22px;
+  margin-right:0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  margin-left: -90px
+}
+.del {
+  background-color: #e01306;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.touch-move-active .content,
+.touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+
+/* 底部全选以及其他 */
+.action{
+  display:flex;
+  position: fixed;
+  bottom:0;
+  width:100%;
+  height: 40px;
+  background: #fff;
+}
+.check{
+  flex-grow: 0.3;
+  padding-left: 15rpx;
+}
+.check>view{
+  display: inline-block;
+  height: 40px;
+}
+.action .weui-cell__bd{
+  line-height: 40px;
+  font-size: 14px;
+}
+.order{
+  display: flex;
+  justify-content: space-between;
+  flex-grow:0.7;
+}
+.action label,.order{
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+}
+.total{
+  color: #e01306;
+  padding:0 10px;
+  box-sizing: border-box;
+  width:358rpx;
+}
+
+
+.order>view:last-child{
+  width:188rpx;
+  background:#e01306;
+  color:#fff;
+  text-align: center;
+}

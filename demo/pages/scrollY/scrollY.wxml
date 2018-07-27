@@ -1,0 +1,28 @@
+<!--pages/login/login.wxml-->
+<view class='box'>
+  <view class='left-nav'>
+    <scroll-view scroll-y style='height:19.3em;' class='menu'>
+      <view wx:for="{{menu}}" class="left-nav-btn {{scrollNum==index?'on':''}}"  data-index='{{index}}' bindtap='toggle'>
+      {{item}}
+      </view>
+    </scroll-view>
+  </view>
+  <view class='right-content'>
+    <scroll-view scroll-y style='height:1100rpx;' bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-into-view="{{toView}}">
+      <view wx:for="{{goods}}" id="{{item.id}}" >
+        <label class="typename">{{item.name}}</label>
+        <view class='right-content-item' wx:for="{{item.children}}" wx:for-item="good">
+          <view class='item-box'>
+            <image src='{{good.img}}'></image>
+            <view>
+              <text>{{good.name}}</text>
+              <view>销量：{{good.number}}</view>
+              <navigator hover-class='none'>立即购买</navigator>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+<!--pages/login/login.wxml-->
+<view class='box'>
+  <view class='left-nav'>
+    <view wx:for="{{tabs}}" class="left-nav-btn {{activeIndex==item.id?'on':''}}" data-id='{{item.id}}' data-index='{{index}}' bindtap='toggle'>
+      {{item.name}}
+    </view>
+  </view>
+  <view class='right-content'>
+    <view  wx:if="{{tabs[currentIndex].isHasChild}}">
+      <scroll-view scroll-y style='height:1100rpx;' bindscrolltolower="lower" bindscrolltoupper="upper" bindscroll="scroll">
+        <view class='right-content-item' wx:for="{{tabs[currentIndex].children}}">
+          <view class='item-box'>
+            <image src='{{item.img}}'></image>
+            <view>
+              <text>{{item.name}}</text>
+              <view>销量：{{item.number}}</view>
+              <navigator hover-class='none'>立即购买</navigator>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view wx:else>
+      该分类下暂无商品
+    </view>
+  </view>
+</view>

@@ -1,0 +1,119 @@
+<!--index.wxml-->
+<import src='../../templates/a/a.wxml' />
+
+<view>
+  <template is="{{num %2===0 ? 'a':'b'}}" data="{{...t1}}"></template>
+</view>
+<view >
+  <navigator url='../scroll/scroll'>去滚</navigator>
+  <navigator url='../login/login'>去分类</navigator>
+
+  <view>{{aaa}}  woshi cheshide </view>
+
+  <view>
+    <test>
+      <view>这是放到插座里面的内容</view>
+    </test>
+  </view>
+
+
+<view>
+    <aaa id="toastedit">{{toastText}}</aaa>     
+    <button type="primary" bindtap="showToast"> showToast! </button>
+</view>
+
+
+  <view>
+    <dialog id='dialog'
+    title='我是标题' 
+    content='我在学习小程序组件' 
+    cancelText='知道了' 
+    confirmText='谢谢' 
+    bind:cancelEvent="_cancelEvent"  
+    bind:confirmEvent="_confirmEvent">
+    </dialog>
+  </view>
+
+  <button bindtap='click'>显示与隐藏组件</button>
+
+  <view wx:for="{{list}}">
+    {{item.customerName}}
+  </view>
+
+  <!-- <image src='E:/testDemo/h5/images/1.jpg'></image> -->
+  <input type="text" placeholder='是否' bindinput="Keyinput1" name="name"/>
+  <input type="number" placeholder='是否' bindinput="Keyinput2" name="name"/>
+  <input type="text" placeholder='是否' bindinput="Keyinput3" name="name"/>
+  <input type="text" placeholder='是否' bindinput="Keyinput4" name="name"/>
+  <input type="text" placeholder='是否' bindinput="Keyinput5" name="name"/>
+
+  <view>输入框1的内容为：{{key1}}</view>
+  <view>输入框2的内容为：{{key2}}</view>
+  <view>输入框3的内容为：{{key3}}</view>
+  <view>输入框4的内容为：{{key4}}</view>
+  <view>输入框5的内容为：{{key5}}</view>
+
+
+
+
+  <button bindtap='clickMe' class='btn'>点击我发送ajax请求！</button>
+
+  <swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" vertical="{{vertical}}" indicator-color="#fff" indicator-active-color="#FF2E63" id='txt'>
+      <block wx:for="{{txtList}}">
+        <swiper-item>
+          <text>{{item.txt}}</text>
+        </swiper-item>
+      </block>
+  </swiper>
+
+
+
+  <navigator url='../../libs/citySelector/switchcity/switchcity'>
+    选择收货地址
+    <view>{{address.province}}{{address.city}}{{address.district}}</view>
+  </navigator>
+
+
+  <view class='box' style='margin-top:200rpx;'>
+    <view>
+      小猪佩奇身上纹
+    </view>
+    <view class='shan'></view>
+  </view>
+
+  <view animation="{{animationData}}" class='animate'></view>
+<view class='bbox'>
+    <view class='item a' >1</view>
+    <view class='item b'  >2</view>
+    <view class='item c'  >3</view>
+    <view class='item d'  >4</view>
+  </view>
+
+
+  <view id='canvas' style='width:100%;display:flex;background:#E3FDFD;height:60rpx;line-height:60rpx;color:red;'>
+    <image src='horn.png' style='width:48rpx;height:48rpx;'></image>
+    <canvas style="width:95%; height:60rpx;color:red;" canvas-id="firstCanvas"></canvas>
+  </view>
+
+  <view style='width:100%;display:flex;background:#E3FDFD;height:60rpx;line-height:60rpx;margin-top:30rpx;position:relative;'>
+    <text id='scroll'>而发色家咖啡馆时刻开始觉得的世界那个</text>
+  </view>
+
+  <view  style='margin-top:200rpx;'>
+    <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526435187&di=c0d2fb346aeed6af6946e98699d46363&imgtype=jpg&er=1&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3Dfe36870588cb39dbc1c0675ee01409a7%2Fbd3134738bd4b31ca4f377548ed6277f9c2ff86b.jpg' style='width:100%;' bindtap='previewImage'></image>
+  </view>
+  <view style='width:100%;min-height:400rpx;background:green;margin-bottom:50rpx;'>
+    
+  </view>
+
+  <button bindtap='upLoad'>上传</button>
+
+  <view style='width:100%;height:80rpx;background:red;position:relative;bottom:1vw;'>
+
+  </view>
+
+
+  
+
+</view>

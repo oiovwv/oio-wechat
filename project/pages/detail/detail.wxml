@@ -1,0 +1,120 @@
+<!-- <import src="/dist/quantity/index.wxml" /> -->
+<view>
+  <view class='detail-box'>
+  <!-- 商品大图 -->
+    <view class="weui-panel">
+      <view class="weui-panel__hd">
+        <swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" vertical="{{vertical}}" indicator-color="#fff" indicator-active-color="#FF2E63">
+          <block wx:for="{{swiperImgs}}">
+            <swiper-item>
+              <image src="{{path}}/{{item}}" class="slide-image" width="100%"/>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text">{{detail[0].productName}}</view>
+            <view class="weui-media-box__desc">{{detail[0].productHeadline}}</view>
+            <button class='zan-btn zan-btn--mini zan-btn--danger zan-btn--plain' open-type='share'>
+              <image src='../../images/icon/share.png' class='share'></image>
+              分享
+            </button>
+            <view class="weui-media-box__info">
+                <view class="weui-media-box__info__meta">运费：</view>
+                <view class="weui-media-box__info__meta">免运费</view>
+                <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">销量：{{detail[0].productCount}}</view>
+                <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">库存：{{detail[0].productStock}}</view>
+            </view>
+          </view>
+      </view>
+    </view>
+
+
+  <view class="zan-panel">
+    <view class="zan-cell tip">
+      <view class="zan-cell__bd">
+        <view class="zan-cell__desc">
+          <image src='../../images/icon/tick.png' class='tick'></image>
+          商家发货&售后
+          <image src='../../images/icon/tick.png' class='tick'></image>
+          精美包装
+          <image src='../../images/icon/tick.png' class='tick'></image>
+          安全保障
+          <view>
+            <image src='../../images/icon/tick.png' class='tick'></image>
+            生鲜类产品不支持7天无理由退货
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+    <view class='weui-panel'>
+      <view class="weui-loadmore weui-loadmore_line">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">商品详情</view>
+      </view>
+      <view class='particulars'>
+        {{detail[0].productParticulars}}
+      </view>
+      <image wx:for="{{imgDetail}}" src="{{path}}/{{item}}" bindtap='previewImage' class='fade_in'></image>
+    </view>  
+  </view>
+
+
+  <!-- 加入购物车的+号 -->
+  <!-- <view class='add-tip'>加入购物车↓</view> -->
+  <view class='add-cart' bindtap='addToCart'>+</view>
+  
+
+  <!-- 底部功能框 -->
+  <view class='add-box'>
+    <view class='price-box'>
+      <text>￥{{detail[0].productPrice}}</text>
+      <view bindtap='toCart'>
+        <image src="../../images/icon/cart.png"></image>
+        <view>
+          购物车
+        </view>
+      </view>
+    </view>
+    <view class='btn'>
+      <button class="zan-btn zan-btn--danger" bindtap='toggleBuy'>立即购买</button>
+    </view>
+  </view>
+  <!-- 弹出层 -->
+  <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog__mask" bindtap="toggleBuy" />
+
+    <view class="zan-dialog__container" wx:if="{{swiperImgs[0]}}">
+      <view class='dialog-box'>
+        <view class="zan-card">
+          <view class="zan-card__thumb">
+              <image class="zan-card__img" src="{{path}}/{{swiperImgs[0]}}"></image>  
+          </view>
+          <view class="zan-card__detail">
+            <view class="zan-card__detail-row">
+              <view class="zan-card__right-col">单价：￥{{detail[0].productPrice}}</view>
+              <view class="zan-card__left-col zan-ellipsis--l2">
+                {{detail[0].productName}}
+              </view>
+            </view>
+            <view>
+              <text>购买数量：</text>
+              <view class='zan-quantity'>
+                <view class="zan-quantity__minus {{val<=1 ? 'zan-quantity--disabled':''}}" bindtap='handleMinus'>-</view>
+                <input value='{{val}}' type='number' class='zan-quantity__text' bindblur='handleBlur'></input>
+                <view class="zan-quantity__plus {{val>=detail[0].productStock ? 'zan-quantity--disabled':''}}" bindtap='handlePlus'>+</view>
+              </view>
+              <text>{{detail[0].productExplain}}</text>
+            </view>
+             
+          </view>
+        </view>
+        <view class='order' bindtap='placeOrder'>下一步</view>
+      </view>
+      <image src='../../images/icon/closed.png' class='close' bindtap='toggleBuy'></image>
+    </view>  
+  </view>
+</view>
+

@@ -1,0 +1,67 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.91",
+	"appid": "touristappid",
+	"projectname": "%E6%B5%8B%E8%AF%95%E6%95%88%E6%9E%9C",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "滚",
+					"pathName": "pages/scroll/scroll",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "分类",
+					"pathName": "pages/login/login",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "验证码",
+					"pathName": "pages/timer/timer",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "再滚",
+					"pathName": "pages/scrollY/scrollY",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "adas",
+					"pathName": "pages/ee/ee",
+					"query": ""
+				}
+			]
+		}
+	}
+}

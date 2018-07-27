@@ -1,0 +1,104 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<view class='order-info-box'>
+  <!-- 订单状态栏 -->
+  <view class="weui-cells weui-cells_after-title" id="status">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <view wx:if="{{status==2}}">等待付款</view>
+        <view wx:elif="{{status==1}}">已付款，等待发货</view>
+        <view wx:else>已取消订单</view>
+        <view>订单金额（含运费）：<text>￥{{totalPrice}}</text></view>
+      </view>
+      <view class="weui-cell__ft">
+        <image src='../../images/icon/delay-a.png' class='order-icon' wx:if="{{status==2}}"></image>
+        <image src='../../images/icon/complete-a.png' class='order-icon' wx:elif="{{status==1}}"></image>
+        <image src='../../images/icon/cancel-a.png' class='order-icon' wx:else></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-panel" id="addr-info">
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_small-appmsg">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_access">
+            <view class="weui-cell__hd">
+              <image src='../../images/icon/addr-icon.png' class='icon '></image>
+            </view>
+            <view class="weui-cell__bd">
+              <view>{{address}}</view>
+            </view>
+          </view>          
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 彩条 -->
+  
+  <view class="zan-panel info">
+    <view class="weui-panel__hd">
+       <image src='../../images/icon/mall.png' class='mall-icon'></image> 
+        <text>励熙商城</text>
+    </view>
+    <image src='../../images/icon/youjitiao@2x.png' class='ribbon'></image>
+    <view class="zan-card" wx:for="{{orderProduct[0].list}}">
+      <view class="zan-card__thumb">
+         <image class="zan-card__img" src="{{path}}/{{item.photoPoster}}" mode="aspectFit"></image> 
+      </view>
+      <view class="zan-card__detail">
+        <view class="zan-card__detail-row">
+          <view class="zan-card__right-col">¥ {{item.productPrice}}</view>
+          <view class="zan-card__left-col zan-ellipsis--l2">
+             {{item.productName}}
+          </view>
+        </view>
+
+        <view class="zan-card__detail-row zan-c-gray-darker">
+          <view class="zan-card__right-col">x{{item.number}}</view>
+          <view class="zan-card__left-col">
+            {{item.productExplain}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="zan-panel other-info">
+    <view class="zan-cell">
+      <view class="zan-cell__bd">商品小计</view>
+      <view class="zan-cell__ft">￥{{subtotal}}</view>
+    </view>
+    <view class="zan-cell">
+      <view class="zan-cell__bd">运费</view>
+      <view class="zan-cell__ft">￥{{freight}}</view>
+    </view>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" wx:if="{{status==2 || status==3}}">预付费（含运费）</view>
+      <view class="zan-cell__bd" wx:elif="{{status==1}}">实付费（含运费）</view>
+      <view class="zan-cell__ft total">￥{{totalPrice}}</view>
+    </view>
+  </view>
+
+
+  <view class="other">
+    <view>
+      <view>订单编号：</view>
+      <view>{{orderNum}}</view>
+    </view>
+    <view>
+      <view>创建时间：</view>
+      <view>{{createTime}}</view>
+    </view>
+  </view>
+
+  <view class="weui-flex operate">
+    <view class="weui-flex__item">
+      <button hover-class='none' bindtap='toSee'>重新逛逛</button>
+    </view>
+    <view class="weui-flex__item">
+      <button hover-class='none' bindtap='continuePay'>返回首页</button>
+    </view>
+  </view>
+ 
+</view>

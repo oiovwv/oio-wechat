@@ -1,0 +1,7 @@
+.ta{
+  color:red;
+}
+.tb{
+  color:greenyellow;
+  font-size: 36rpx;
+}

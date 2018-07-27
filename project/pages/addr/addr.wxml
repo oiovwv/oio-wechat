@@ -1,0 +1,56 @@
+<!--pages/addr/addr.wxml-->
+
+<!-- 用户还没有收货地址时 默认显示-->
+<view class='cart-box'hidden="{{isShowAddr}}">
+  <image src='../../images/cart/addr.png'></image>
+  <view>您还没有收货地址！</view>
+  <button class='zan-btn zan-btn--large zan-btn--danger' data-operation="addAddress" bindtap='addAddr'>添加新地址</button>
+</view>
+
+
+<!-- 用户设置了收货地址时 默认隐藏-->
+<view class='' hidden='{{!isShowAddr}}'>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_access" bindtap='addAddr' data-operation="addAddress">
+      <view class="weui-cell__hd">
+        <image src='../../images/icon/add.png' class='add-addr'></image>
+      </view>
+      <view class="weui-cell__bd">添加新地址</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+  </view> 
+
+  <image src='../../images/icon/youjitiao@2x.png' class='line'></image>  
+  <view>
+    <view class='label'  wx:for="{{addressList}}"   >
+      <view class="weui-panel__bd" bindtap='chooserShippingAddr' data-id="{{index}}">  
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title weui-media-box__title_in-text">
+            <view class='info'>
+              <view>{{item.addressName}}</view>
+              <view>{{item.addressPhone}}</view>
+            </view>
+          </view>
+          <view class="weui-media-box__desc">{{item.address_provinces}}{{item.addressPath}}</view>  
+        </view>         
+      </view>
+      <view class='edit'>
+        <view>
+          <switch color="#e01306" checked="{{item.status==1?true:false}}" bindchange='setDefault' data-id='{{item.id}}'></switch> 
+          <text>{{item.status==1?'默认地址':'设为默认'}}</text>
+        </view>
+        <view>
+          <button class="zan-btn zan-btn--mini zan-btn--warn zan-btn--plain" bindtap='del' id="{{index}}" data-id="{{item.id}}">    
+          <image src='../../images/icon/del.png'></image>
+          删除
+          </button>
+          <button class="zan-btn zan-btn--mini zan-btn--danger zan-btn--plain" bindtap='edit' id="{{index}}" data-id='{{item.id}}' data-operation="edit">
+          <image src='../../images/icon/edit.png'></image>
+          修改
+          </button>
+        </view>
+      </view> 
+    </view>
+  </view> 
+</view>
+

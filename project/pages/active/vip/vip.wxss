@@ -1,0 +1,4 @@
+/* pages/active/vip/vip.wxss */
+page{
+  background: #fff;
+}

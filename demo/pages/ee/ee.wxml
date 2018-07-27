@@ -1,0 +1,12 @@
+<!--pages/ee/ee.wxml-->
+<view class='container'>
+  <view>
+    <image src='../../images/a.png' style="width:756rpx;height:770rpx;display:block;"></image>
+  </view>
+  <view>
+    <button class='btn lo'>登陆</button>
+  </view>
+  <view>
+    <button class='btn re'>注册</button>
+  </view>
+</view>

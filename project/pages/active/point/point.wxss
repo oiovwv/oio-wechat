@@ -1,0 +1,4 @@
+/* pages/active/point/point.wxss */
+page{
+  background: #fff;
+}

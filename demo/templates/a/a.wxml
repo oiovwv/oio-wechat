@@ -1,0 +1,7 @@
+<template name="a">
+  <view class='ta'>{{txt}}</view>
+</template>
+
+<template name="b">
+  <view class='tb'>{{txt}}</view>
+</template>

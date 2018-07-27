@@ -1,0 +1,87 @@
+<!--index.wxml-->
+<view class='page__bd'>
+  <!-- 顶部 -->
+  <view class='weui-panel weui-panel_access'>
+    <view class="weui-panel__bd">
+      <view  class="weui-media-box weui-media-box_appmsg">
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">牵肠挂肚手机维修</view>
+          <view class="weui-media-box__desc">手机◆电脑数码产品维修</view>
+        </view>
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="../../images/a.jpg" />
+        </view>
+      </view>            
+    </view>
+  </view>
+
+  <view class="weui-panel box">
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_small-appmsg">
+        <view class="weui-cells weui-cells_in-small-appmsg">
+          <!-- 一 -->
+          <view class="weui-cell weui-cell_access" bindtap='listenerBtnGetLocation'>
+            <view class="weui-cell__hd">
+              <image src="../../images/addr.png" class='icon' />
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+              <view>文字标题</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+          <!-- 二 -->
+          <view class="weui-cell weui-cell_access">
+            <view class="weui-cell__hd">
+              <image src="../../images/time.png" class='icon' />
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+                <view>6:00-24:00</view>
+            </view>
+          </view>
+          <!-- 三 -->
+          <view class="weui-cell weui-cell_access" bindtap='call'>
+            <view class="weui-cell__hd">
+              <image src="../../images/call.png" class='icon' />
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+                <view>184848484848</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+          <!-- 四 -->
+          <view class="weui-cell weui-cell_access">
+            <view class="weui-cell__hd">
+              <image src="../../images/photo.png" class='icon' />
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+                <view>门店照片</view>
+            </view>
+          </view>
+          <view>
+            <swiper 
+              indicator-dots="{{indicatorDots}}"
+              autoplay="{{autoplay}}" 
+              interval="{{interval}}" 
+              duration="{{duration}}" 
+              circular="{{circular}}" 
+              vertical="{{vertical}}" 
+              indicator-color="#fff" 
+              indicator-active-color="#FF2E63">
+                <block wx:for="{{swiperImgs}}" wx:key='i'>
+                  <swiper-item>
+                    <image src="{{item}}" class="slide-image" bindtap='previewImage' />
+                  </swiper-item>
+                </block>
+            </swiper>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="weui-footer weui-footer_fixed-bottom">
+    <view class="weui-footer__links">
+        <navigator url="" class="weui-footer__link">反馈问题</navigator>
+    </view>
+    <view class="weui-footer__text">Copyright © 2018- 怪力Cc</view>
+  </view>

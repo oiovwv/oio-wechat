@@ -1,0 +1,128 @@
+/* pages/all/all.wxss */
+@import "../../style/weui.wxss";
+@import "../../app.wxss";
+page{
+  padding-bottom:30rpx; 
+}
+.tabs-box{
+  background: #fff;
+}
+
+.tabs-box .weui-flex{
+  display: inline-block;
+  width: 29%;
+  margin:10px 4px 5px 9px;
+}
+.tabs-box .weui-flex__item{
+  text-align: center;
+  border:1px solid #bfbfbf;
+  font-size:12px;
+  padding:3px 0;
+  color:#666;
+}
+
+.tabs-box .weui-bar__item_on{
+  color:#e01306;
+  border-color:#ffb6b9;
+}
+.on{
+  height: 85px;
+  overflow: hidden;
+}
+.arrows-box{
+  text-align: center;
+}
+.arrows{
+  width:18px;
+  height:18px;
+}
+.content-box{
+  background:#fff;
+  margin:10rpx 0;
+  padding:0 15rpx;
+}
+.time{
+  height: 0;
+  padding:5px;
+  text-align:center;
+  visibility: hidden;
+}
+.time>text{
+  font-size:20rpx;
+  height:30px;
+  line-height:32px;
+  font-weight:400;
+  color:#444;
+  padding:5px 10px;
+  border:1px solid #444;
+}
+.WxMasonryView,.full{
+  display:flex;
+  flex-flow:row wrap;
+  justify-content:space-between;
+}
+.full{
+  width: 100%;
+}
+.WxMasonry{
+  width:calc(96%/2);
+  box-sizing:border-box;
+  background: #fefefe;
+  border: 1px solid #fcfcfc;
+  box-shadow: 0 5px 5px rgba(34, 25, 25, 0.4);
+  margin: 0px 2px 5px 2px;
+  padding: 10rpx 10rpx 0;
+  transition: opacity .4s ease-in-out;
+  border-radius:15rpx;
+} 
+
+.content-box .all-img{
+  width:100%;
+  height:300rpx;
+  padding:3px;
+  box-sizing:border-box;
+}
+.order-now{
+  display: flex;
+  justify-content: space-around;
+  padding:0 0 5px;
+}
+.order-now text,.order-now navigator{
+  color:#e01306;
+}
+.order-now text{
+  display: inline-block;
+  width: 158rpx;
+}
+.order-now navigator{
+  display:inline-block;
+  border:1px solid #e01306;
+  font-size:24rpx;
+  padding:0px 6px;
+  margin:4rpx 0 0 15px;
+  border-radius:5px;
+  height:52rpx;
+  box-sizing:border-box;
+  line-height:50rpx;
+}
+.product-name{
+  font-size: 26rpx;
+  margin:0 0 5px;
+  padding:0 10px;
+  color: #333;
+}
+
+.empty{
+  width: 100%;
+  padding:30rpx;
+  text-align: center;
+}
+.empty image{
+  width: 340rpx;
+  height: 288rpx;
+}
+
+.empty view{
+  font-size: 26rpx;
+  color:#e01306;
+}

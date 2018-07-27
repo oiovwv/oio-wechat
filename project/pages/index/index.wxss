@@ -1,0 +1,171 @@
+@import "../../style/weui.wxss"; 
+@import "../../app.wxss"; 
+/**index.wxss**/
+
+page{
+  padding:0 0 15rpx;
+}
+swiper{
+  width: 100%;
+  height:400rpx;
+}
+.slide-image{
+  width:100%;
+  height:100%;
+}
+#txt{
+    width:90%;
+    height:60rpx;
+    background:#E3FDFD;
+    color: #FF2E63;
+    font-size:24rpx;
+    line-height: 60rpx;
+}
+#txt text{
+  display: inline-block;
+  width:100%;
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* 四个图标 */
+.weui-flex{
+  background:#fff;
+  padding:5px 10px;
+  margin-bottom: 15rpx;
+}
+.weui-flex__item{
+  text-align: center;
+  padding:5px;
+  font-size: 28rpx;
+  color:#666;
+}
+.weui-flex__item image{
+  width:80rpx;
+  height: 80rpx;
+}
+/* 滚动文字 */
+.zan-noticebar {
+  font-size: 26rpx;
+  color:#F73859;
+}
+.zan-panel{
+  margin-top:0; background: #E3FDFD; 
+}
+.discounts-box .zan-panel{
+  border:none;
+}
+.explain{
+  font-size: 12px;
+}
+.zan-card{
+  border-bottom:1rpx solid #e1e1e1;
+}
+.zan-card:last-child{
+  border:none;
+}
+.zan-card__detail-row{
+  margin-bottom:10px;
+}
+
+
+.box{
+  margin:0 0 15rpx;
+  background: #E3FDFD;
+}
+.discounts{
+  padding: 10rpx 0;
+  margin:5px auto;
+  width: 100%;
+  border-radius:8px; 
+  box-shadow:0 3px 8px rgba(34, 25, 25, 0.4);
+}
+.discounts:first-child{
+  margin-top:0;
+}
+.title{
+  border:none;
+  height: 46rpx;
+}
+.title>image{
+  width:100%;
+  height:46rpx;
+}
+
+view.text{
+  display:flex;
+  align-items:center;
+  position:relative;
+  padding:10px 10px 10px 12px;
+  font-size:15px;
+  color:#656565;
+}
+/* .line_flag{
+  width:3px;
+  height:15px;
+  display:inline-block;
+  background-color:#39C568;
+} */
+view.text text{
+  margin-left:10px;
+  line-height:18px;
+  font-weight:bold;
+}
+.scroll{
+  display: flex;
+  padding:0 20rpx;
+  border-top:none;
+  border-bottom:none;
+}
+
+.scroll>image{
+  width:48rpx;
+  height:48rpx;
+  margin:6rpx 10rpx 0 0;
+}
+
+/* 九宫格图片 */
+ .weui-grids{
+  padding:5rpx 15rpx 15rpx;
+  border-top:none; 
+  border-left: none;
+} 
+.weui-grid{
+  border-right: none;
+  border-bottom: none;
+  padding:3px;
+}
+.weui-grids navigator{
+  /* width:33.3333333333333333%; */
+   width:239rpx;
+  height:239rpx;
+  display: inline-block;
+   /* margin:0 8rpx 16rpx 8rpx;  */
+  position: relative;
+  box-sizing: border-box;  
+  margin-left:1rpx;
+}
+.weui-grids image{
+  width:100%;
+  height:100%;
+  border-radius: 5rpx;
+}
+
+.original{
+  text-decoration: line-through;
+  font-size:12px;
+}
+.discount{
+  color:#e01306;
+  font-weight:bold;
+}
+
+.weui-loadmore_line{
+  margin:1.5em auto 0;
+}
+
+
+
+
+

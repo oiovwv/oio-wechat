@@ -1,0 +1,46 @@
+
+<import src="../../model/model.wxml"/>
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <view class="zan-panel">
+    <view class='zan-cell zan-field'>
+      <view class='zan-cell_hd zan-field__title'>收件人：</view>
+      <input class='zan-field__input zan-cell__bd' value='{{addressEdit.addressName}}' name="uname" type="text"  confirm-type="done" placeholder='填写收货人姓名'></input>
+    </view>
+    <view class='zan-cell zan-field sex'>
+      <view class='zan-cell_hd zan-field__title'></view>
+      <view class='zan-field__input zan-cell__bd'>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{sex}}">
+            <radio value="{{item.value}}" checked="{{item.checked}}" color="#e01306"/>{{item.name}}
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class='zan-cell zan-field'>
+      <view class='zan-cell_hd zan-field__title'>联系电话：</view>
+      <input class='zan-field__input zan-cell__bd' value='{{addressEdit.addressPhone}}' name="uphone" type="number" confirm-type="done" placeholder='填写11位手机号码'></input>
+    </view>
+    <view class='zan-cell zan-field'>
+      <view class='zan-cell_hd zan-field__title'>所在地区：</view>
+      <view class='zan-field__input zan-cell__bd'>
+        <view hidden='{{isShowCity}}'>选择您所在的省市区</view>
+        <view hidden='{{!isShowCity}}'>{{address}}</view>
+      </view>
+      <view bindtap="translate">
+        <image src='../../images/icon/right.png' class='choose-area'></image>
+      </view>
+    </view>
+    <view class='zan-cell zan-field'>
+      <view class='zan-cell_hd zan-field__title'>详细地址：</view>
+      <input class='zan-field__input zan-cell__bd' value='{{addressEdit.addressPath}}' name="addr" type="text" confirm-type="done" placeholder='填写详细地址，如小区+楼号+门牌号'></input>
+    </view>
+  </view>
+
+  <template is="areaData" data="{{...item}}"/>
+
+
+  <!-- 保存与取消 -->
+  <view class='save-addr'>
+    <button formType="submit">保存</button>
+  </view>
+</form>

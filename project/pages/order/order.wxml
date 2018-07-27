@@ -1,0 +1,211 @@
+<!--pages/order/order.wxml-->
+<view class='cart-box' hidden="{{isShowOrder}}">
+  <image src='../../images/cart/order.png'></image>
+  <view>您当前还没有订单</view>
+</view>
+
+<view hidden='{{!isShowOrder}}'>
+  <view class="page">
+    <view class="page__bd">
+      <view class="weui-tab">
+        <view class="weui-navbar" style='position:fixed;'>
+          <block wx:for="{{tabs}}" wx:key="*this">
+              <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                  <view class="weui-navbar__title">{{item}}</view>
+              </view>
+          </block>
+          </view>
+        <view class="weui-tab__panel">
+          <!-- 全部订单 -->
+          <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+            <view class="weui-panel weui-panel_access" wx:for="{{allList}}" hidden="{{!isShowOrder}}">
+              <view class="weui-panel__hd">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd">订单编号：{{item.ordernumber}}</view>               
+                  <view class='weui-cell__ft'>
+                    <view wx:if="{{item.status==2}}">待付款</view>
+                    <view wx:elif="{{item.status==1}}">已付款</view>
+                    <view wx:else>已取消</view>
+                  </view>               
+                </view>
+              </view>
+              <view class="weui-panel__bd">
+                <view class="zan-card" wx:for="{{item.list}}" wx:for-item="twoData">
+                  <view class="zan-card__thumb">
+                    <image class="zan-card__img" src="{{path}}/{{twoData.photoPoster}}" mode="aspectFit"></image>
+                  </view>
+                  <view class="zan-card__detail">
+                    <view class="zan-card__detail-row">
+                      <view class="zan-card__right-col">¥ {{twoData.productPrice}}</view>
+                      <view class="zan-card__left-col zan-ellipsis--l2">
+                        {{twoData.productName}}
+                      </view>
+                    </view>
+
+                    <view class="zan-card__detail-row zan-c-gray-darker">
+                      <view class="zan-card__right-col">x{{twoData.number}}</view>
+                      <view class="zan-card__left-col">
+                        {{twoData.productExplain}}
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="weui-panel__ft">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd"></view>
+                  <view>
+                    <button class="zan-btn zan-btn--mini zan-btn--plain" data-status='{{item.status}}' data-id='{{index}}' bindtap='toOrderDetail' data-orderId='{{item.ordernumber}}'>查看订单详情</button>
+                    <button class="zan-btn zan-btn--mini zan-btn--danger zan-btn--plain" data-price='{{item.price}}' hidden='{{item.status==3||item.status==1}}' data-status='{{item.status}}' data-orderId='{{item.ordernumber}}' bindtap='continuePay'>继续支付</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <!-- 待付款 -->
+          <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+            <view class="weui-panel weui-panel_access" wx:for="{{delayList}}" hidden="{{delayBox}}">
+              <view class="weui-panel__hd">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd">订单编号：{{item.ordernumber}}</view>               
+                    待付款                
+                </view>
+              </view>
+              <view class="weui-panel__bd">
+                <view class="zan-card" wx:for="{{item.list}}" wx:for-item="twoData">
+                  <view class="zan-card__thumb">
+                    <image class="zan-card__img" src="{{path}}/{{twoData.photoPoster}}" mode="aspectFit"></image>
+                  </view>
+                  <view class="zan-card__detail">
+                    <view class="zan-card__detail-row">
+                      <view class="zan-card__right-col">¥ {{twoData.productPrice}}</view>
+                      <view class="zan-card__left-col zan-ellipsis--l2">
+                        {{twoData.productName}}
+                      </view>
+                    </view>
+
+                    <view class="zan-card__detail-row zan-c-gray-darker">
+                      <view class="zan-card__right-col">x{{twoData.number}}</view>
+                      <view class="zan-card__left-col">
+                        {{twoData.productExplain}}
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="weui-panel__ft">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd"></view>
+                  <view>
+                  <button class="zan-btn zan-btn--mini zan-btn--plain" data-status='{{item.status}}' data-id='{{index}}' bindtap='toOrderDetail' data-orderId='{{item.ordernumber}}'>查看订单详情</button>
+                    <button class="zan-btn zan-btn--mini zan-btn--plain" bindtap='deleteOrder' data-index='{{index}}' data-orderId='{{item.ordernumber}}'>取消订单</button>
+                    <button class="zan-btn zan-btn--mini zan-btn--danger zan-btn--plain" data-price='{{item.price}}' bindtap='continuePay' data-status='{{item.status}}' data-orderId='{{item.ordernumber}}'>继续支付</button>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='order-box' hidden="{{!delayBox}}">
+              <image src='../../images/cart/empty.png'></image>
+              <view>您还没有待付款订单！</view>
+            </view>   
+          </view>
+
+          <!-- 已付款 -->
+          <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+            <view class="weui-panel weui-panel_access" wx:for="{{completeList}}" hidden="{{completeBox}}"> 
+              <view class="weui-panel__hd">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd">订单编号：{{item.ordernumber}}</view>               
+                    已付款                
+                </view>
+              </view>
+              <view class="weui-panel__bd">
+                <view class="zan-card" wx:for="{{item.list}}" wx:for-item="twoData">
+                  <view class="zan-card__thumb">
+                    <image class="zan-card__img" src="{{path}}/{{twoData.photoPoster}}" mode="aspectFit"></image>
+                  </view>
+                  <view class="zan-card__detail">
+                    <view class="zan-card__detail-row">
+                      <view class="zan-card__right-col">¥ {{twoData.productPrice}}</view>
+                      <view class="zan-card__left-col zan-ellipsis--l2">
+                        {{twoData.productName}}
+                      </view>
+                    </view>
+
+                    <view class="zan-card__detail-row zan-c-gray-darker">
+                      <view class="zan-card__right-col">x{{twoData.number}}</view>
+                      <view class="zan-card__left-col">
+                        {{twoData.productExplain}}
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="weui-panel__ft">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd"></view>
+                  <view>
+                    <button class="zan-btn zan-btn--mini zan-btn--plain" data-status='{{item.status}}' data-id='{{index}}' bindtap='toOrderDetail' data-orderId='{{item.ordernumber}}'>查看订单详情</button>
+                  </view>
+                </view>
+              </view>
+            </view>    
+            <view class='order-box' hidden="{{!completeBox}}">
+              <image src='../../images/cart/empty.png'></image>
+              <view>您还没有已付款订单！</view>
+            </view> 
+          </view>
+
+          <!-- 已取消 -->
+          <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
+            <view class="weui-panel weui-panel_access" wx:for="{{cancelList}}" hidden="{{cancelBox}}">
+            
+              <view class="weui-panel__hd">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd">订单编号：{{item.ordernumber}}</view>               
+                    已取消               
+                </view>
+              </view>
+              <view class="weui-panel__bd">
+                <view class="zan-card" wx:for="{{item.list}}" wx:for-item="twoData">
+                  <view class="zan-card__thumb">
+                    <image class="zan-card__img" src="{{path}}/{{twoData.photoPoster}}" mode="aspectFit"></image>
+                  </view>
+                  <view class="zan-card__detail">
+                    <view class="zan-card__detail-row">
+                      <view class="zan-card__right-col">¥ {{twoData.productPrice}}</view>
+                      <view class="zan-card__left-col zan-ellipsis--l2">
+                        {{twoData.productName}}
+                      </view>
+                    </view>
+
+                    <view class="zan-card__detail-row zan-c-gray-darker">
+                      <view class="zan-card__right-col">x{{twoData.number}}</view>
+                      <view class="zan-card__left-col">
+                        {{twoData.productExplain}}
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="weui-panel__ft">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd"></view>
+                  <view>
+                    <button class="zan-btn zan-btn--mini zan-btn--plain" data-status='{{item.status}}' data-id='{{index}}' bindtap='toOrderDetail' data-orderId='{{item.ordernumber}}'>查看订单详情</button>
+                  </view>
+                </view>
+              </view>
+            </view>    
+            <view class='order-box' hidden="{{!cancelBox}}">
+              <image src='../../images/cart/empty.png'></image>
+              <view>您还没有已取消订单！</view>
+            </view> 
+          </view>
+
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

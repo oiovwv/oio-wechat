@@ -1,0 +1,114 @@
+<!--index.wxml-->
+<view class="">
+  <view>
+    <swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" vertical="{{vertical}}" indicator-color="#fff" indicator-active-color="#FF2E63">
+      <block wx:for="{{swiperImgs}}">
+        <swiper-item>
+          <image src="{{path}}/{{item}}" class="slide-image fade_in" width="100%"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- 文字滚动 -->
+  <view>
+    <view class="zan-panel scroll">
+      <image src='../../images/icon/horn.png'></image>
+      <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" vertical="{{txtVertical}}"  id='txt'>
+        <block wx:for="{{txtList}}">
+          <swiper-item>
+            <text>{{item}}</text>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view> 
+
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <navigator url='../active/vip/vip' hover-class='none'>
+          <image src='../../images/icon/vip.png'></image>
+          <view class="placeholder">特价会员</view>
+        </navigator>
+      </view>
+      <view class="weui-flex__item">
+        <navigator  url='../active/hot/hot' hover-class='none'>
+          <image src='../../images/icon/hot.png'></image>
+          <view class="placeholder">火热来袭</view>
+        </navigator>
+      </view>
+      <view class="weui-flex__item">
+        <navigator  url='../active/share/share' hover-class='none'>
+          <image src='../../images/icon/share-i.png'></image>
+          <view class="placeholder">大牌分享</view>
+        </navigator>
+      </view>
+      
+      <view class="weui-flex__item">
+        <navigator url='../active/point/point' hover-class='none'>
+          <image src='../../images/icon/integral.png'></image>
+          <view class="placeholder">积分商城</view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  
+
+<view class='zan-panel title'>
+  <image src='../../images/icon/title-1.png'></image>
+</view>
+  
+  <view class='box'>
+  <!-- 九宫格图片 -->
+  <view class="page__bd">
+    <view class="weui-grids">
+        <block wx:for="{{productGrid}}" wx:key="*this">
+            <navigator url="../detail/detail?productId={{item.photoId}}" open-type="navigate" class="weui-grid" hover-class="none">
+                <image class="weui-grid__icon fade_in" src="{{path}}/{{item.photoPoster}}" lazy-load='true'  mode='scaleToFill'/>
+            </navigator>
+        </block>
+    </view>
+  </view>
+
+  </view>
+
+  <view class='zan-panel title'>
+    <image src='../../images/icon/title-2.png'></image>
+  </view>
+
+  <view class='box'>
+    <view class='discounts-box'>
+      <view class="zan-panel discounts" wx:for="{{discounts}}">
+      <navigator class="zan-card"  url="../detail/detail?productId={{item.photoId}}" hover-class='none'>
+        <view class="zan-card__thumb">
+          <image class="zan-card__img" src="{{path}}/{{item.photoPoster}}"></image>
+        </view>
+        <view class="zan-card__detail">
+          <view class="zan-card__detail-row">
+            <view class="zan-card__right-col original">￥{{item.productoldPrice}}</view>
+            <view class="zan-card__left-col zan-ellipsis--l2">
+              {{item.productHeadline}}
+            </view>
+          </view>
+
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__right-col discount">折后价:￥{{item.productPrice}}</view> 
+            <view class="zan-card__left-col explain">
+              {{item.productExplain}}
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+    </view>
+  </view>
+  
+  <view class="page__bd" hidden='{{showLoading}}'>
+    <view class="weui-loadmore" wx:if="{{isLoadmore}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+    </view> 
+    <view class="weui-loadmore weui-loadmore_line" wx:else>
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line" style='background-color:#eee;'>我是有底线的</view>
+    </view>  
+  </view>   
+</view>

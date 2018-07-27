@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/guide/guide",
+    "pages/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "嘻嘻",
+    "navigationBarTextStyle":"black"
+  }
+}

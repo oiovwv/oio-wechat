@@ -1,0 +1,49 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/my/my",
+    "pages/all/all",
+    "pages/order/order",
+    "pages/detail/detail",
+    "pages/service/service",
+    "pages/cart/cart",
+    "pages/addr/addr",
+    "pages/question/question",
+    "pages/placeorder/placeorder",
+    "pages/edit/edit",
+    "pages/orderDetail/orderDetail",
+    "pages/active/vip/vip",
+    "pages/active/point/point",
+    "pages/active/hot/hot",
+    "pages/active/share/share"
+  ],
+  "window":{
+    "backgroundColor": "#fff",
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "励熙商城",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar":{
+    "list":[{
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icon/index1.png",
+        "selectedIconPath": "images/icon/index2.png"
+      },
+      {
+        "pagePath": "pages/all/all",
+        "text": "分类",
+        "iconPath": "images/icon/all1.png",
+        "selectedIconPath": "images/icon/all2.png"
+      },
+      {"pagePath":"pages/my/my",
+        "text": "我的",
+        "iconPath": "images/icon/user1.png",
+        "selectedIconPath": "images/icon/user2.png"
+      }],
+      "selectedColor": "#2FE1D6",
+      "borderStyle":"white"
+  },
+  "debug":false
+}

@@ -1,0 +1,4 @@
+/* pages/active/share/share.wxss */
+page{
+  background: #fff;
+}

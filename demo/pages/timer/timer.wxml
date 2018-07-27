@@ -1,0 +1,21 @@
+<!--pages/timer/timer.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
+<view class='box'>
+  <view class='edit'>
+    手机号：<input type='number' placeholder='请输入手机号' bindinput='watchInput'></input></view>
+  <view>
+    <view bindtap='getCode' class='code' wx:if="{{isClick}}">{{clickCount==0?'获取验证码':'重新发送'}}</view>
+    <view class='code' wx:else>倒计时{{time}}秒</view> 
+  </view>
+</view>
+
+
+
+<view>
+  <text>{{o}}</text>
+  <view class="wxParse">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+  </view>
+  <text>{{t}}</text>
+</view>
+

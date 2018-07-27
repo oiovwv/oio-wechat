@@ -1,0 +1,5 @@
+<!--components/Test/test.wxml-->
+<view>
+  <view>这是测试插座属性的组件内部的文字</view>
+  <slot></slot>
+</view>

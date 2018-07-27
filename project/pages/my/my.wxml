@@ -1,0 +1,96 @@
+<!--pages/my/my.wxml-->
+<view class='impower_box' hidden='{{isShowMine}}'>
+  <image src='../../images/cart/2.png'></image>
+  <view>为了您能更好的体验，需要您的授权（昵称、头像等）才能查看更多！</view>
+  <button hover-class='none' open-type="getUserInfo" bindgetuserinfo="getUserInfoFunction">立即授权</button>
+</view>
+
+
+
+<view class='box' hidden='{{!isShowMine}}'>
+  <view class='userinfo'>
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class="weui-panel">
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_small-appmsg">
+        <view class="weui-cells weui-cells_in-small-appmsg">
+          <navigator url="../order/order" class="weui-cell weui-cell_access"  hover-class="none" data-index='{{index}}'>
+          <view class="weui-cell__hd">
+            <image class='icon' src="../../images/icon/a.png" />
+          </view>
+          <view class="weui-cell__bd weui-cell_primary">
+            <view>我的订单</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">查看全部订单</view>
+        </navigator>
+        <view class='weui-cell weui-cell_access'>
+          <view class="weui-flex">
+            <navigator url='../order/order?activeIndex=1' class="weui-flex__item" hover-class='none'>
+              <image src='../../images/icon/delay.png' class='order-icon'></image>
+              <view class="placeholder">
+                待付款
+              </view>
+            </navigator>
+            <navigator url='../order/order?activeIndex=2' class="weui-flex__item" hover-class='none'>
+              <image src='../../images/icon/complete.png' class='order-icon'></image>
+              <view class="placeholder">
+                已付款
+              </view>
+            </navigator>
+            <navigator url='../order/order?activeIndex=3' class="weui-flex__item" hover-class='none'>
+              <image src='../../images/icon/cancel.png' class='order-icon'></image>
+              <view class="placeholder">
+                已取消
+              </view>
+            </navigator>
+          </view>
+        </view> 
+
+        <navigator class="weui-cell weui-cell_access" url='../cart/cart' hover-class='none'>
+            <view class="weui-cell__hd">
+              <image src="../../images/icon/b.png" class='icon'/>
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+              <view>我的购物车</view>
+              
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </navigator>
+
+          <view class="weui-cell weui-cell_access" bindtap='chooseAddress' data-source='fromMy'>
+            <view class="weui-cell__hd">
+              <image src="../../images/icon/c.png" class='icon'/>
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+                <view>收货地址</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+
+
+          <navigator url="{{item.navigatorUrl}}" class="weui-cell weui-cell_access" wx:for="{{userInfoList}}" hover-class="none" data-index='{{index}}'>
+            <view class="weui-cell__hd">
+              <image src="{{item.icon}}" class='icon' />
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+                <view>{{item.text}}</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">{{item.caption}}</view>
+          </navigator>
+
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__hd">
+            <image src="../../images/icon/agency.png" class='icon'/>
+          </view>
+          <view class="weui-cell__bd weui-cell_primary">
+            <view>招商加盟</view>
+          </view>
+          <image src="../../images/icon/phone.png" bindtap="openConfirm" class='phone'></image>
+        </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

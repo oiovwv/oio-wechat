@@ -1,0 +1,89 @@
+/* pages/login/login.wxss */
+page{
+  height: 100%;
+}
+::-webkit-scrollbar{
+  width:0;
+  height: 0;
+  color: transparent;
+}
+.box{
+  width:100%;
+  height: 100%;
+  overflow: hidden;
+}
+.left-nav{
+  float: left;
+  width:30%;
+  background: #efefef;
+}
+.left-nav-btn{
+  box-sizing: border-box;
+  padding:25rpx 50rpx;
+  text-align: center;
+  color:#333;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #fcfcfc;
+  background: #fbf0f0;
+}
+.left-nav-btn:first-child{
+  border-top:1rpx solid #fcfcfc;
+}
+.left-nav-btn.on{
+  background: #fff;
+  color:#fa4659;
+  border-left: 10rpx solid #ff6464;
+}
+
+.right-content{
+  float: right;
+  width:70%;
+  height: 100%;
+  background: #fff;
+}
+.item-box{
+  padding:20rpx;
+  display: flex;
+  font-size:28rpx;
+}
+.item-box image{
+  width:170rpx;
+  height: 164rpx;
+}
+.item-box>view{
+  flex-grow: 1;
+  padding:15rpx 0 15rpx 15rpx;
+}
+.item-box>view>text{
+  font-size:30rpx;
+  margin:0 0 5rpx;
+}
+.item-box>view>navigator{
+  width: 50%;
+  text-align: center;
+  padding:6rpx 10rpx;
+  border:1rpx solid #fa4659;
+  border-radius:10rpx; 
+}
+
+
+.typename{
+  display:block;
+  line-height: 2.7em;
+  padding:0 0.7em;
+  color:#333;
+  font-size: 0.85em;
+  background: #F4F5F7;
+  position: relative;
+}
+.typename:after{
+  content: "";
+  width: 0.15em;
+  height: 100%;
+  display: inline-block;
+  background: #1BAB43;
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:10;
+}

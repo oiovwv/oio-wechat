@@ -1,0 +1,29 @@
+/**app.wxss**/
+@import "dist/index.wxss";
+page{background:#efefef;}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.fade_in {
+    animation: fadeIn 1s both;
+}
+
+.active_box image{
+  width: 100%;
+}
+.active_box>view{
+  width: 100%;
+  padding: 10rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  color:#FF2E63;
+}

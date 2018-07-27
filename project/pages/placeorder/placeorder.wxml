@@ -1,0 +1,80 @@
+
+<view class='order-info-box'>
+
+  <view class="weui-panel" id="addr-info">
+    <view class="weui-panel__hd">地址信息</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_small-appmsg">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_access" hidden='{{isChooseAddr}}' bindtap='chooseAddress' data-source='fromPlaceorder'>
+            <view class="weui-cell__hd">
+              <text class='add-addr'>+</text>
+            </view>
+            <view class="weui-cell__bd">选择收货地址</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+          <view  class="weui-cell weui-cell_access"  hidden='{{!isChooseAddr}}' bindtap='chooseAddress' data-source='fromPlaceorder'>
+            <view class="weui-cell__hd">
+              <image src='../../images/icon/addr.png' class='addr-icon'></image>
+            </view>
+            <view class="weui-cell__bd ">{{addr}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>            
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 彩条 -->
+  
+  <view class="zan-panel info">
+    <view class="weui-panel__hd">商品信息</view>
+    <image src='../../images/icon/youjitiao@2x.png' class='ribbon'></image>
+    <view class="zan-card" wx:for="{{productList}}">
+      <view class="zan-card__thumb">
+         <image class="zan-card__img" src="{{path}}/{{item.photoPoster}}" mode="aspectFit"></image> 
+      </view>
+      <view class="zan-card__detail">
+        <view class="zan-card__detail-row">
+          <view class="zan-card__right-col">¥ {{item.productPrice}}</view>
+          <view class="zan-card__left-col zan-ellipsis--l2">
+             {{item.productName}}
+          </view>
+        </view>
+
+        <view class="zan-card__detail-row zan-c-gray-darker">
+          <view class="zan-card__right-col">x{{item.number}}</view>
+          <view class="zan-card__left-col">
+            {{item.productExplain}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="zan-panel other-info">
+    <view class="zan-cell">
+      <view class="zan-cell__bd">配送方式</view>
+      <view class="zan-cell__ft">普通快递</view>
+    </view>
+    <view class="zan-cell">
+      <view class="zan-cell__bd" style='flex:0.3;'>留言</view>
+      <view class="zan-cell__ft advise">
+        <input type='text' placeholder='点击给商家留言/建议' bindinput='bindKeyInput' value='{{inputValue}}'></input>
+      </view>
+    </view>
+    <view class="zan-cell">
+      <view class="zan-cell__bd">合计</view>
+      <view class="zan-cell__ft total">￥{{totalPrice}}</view>
+    </view>
+  </view>
+
+  <!-- 底部确认下单按钮 -->
+  <view class='order-sure'>
+    <view class='total'>
+      <text>合计：</text>
+      <text>￥{{totalPrice}}</text>
+    </view>
+    <view bindtap='confirmOrder'>确认支付</view>
+  </view>
+</view>

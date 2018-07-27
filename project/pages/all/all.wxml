@@ -1,0 +1,41 @@
+<!--pages/all/all.wxml-->
+<view class=""> 
+  <view class='tabs-box'>
+    <view class="page__bd page__bd_spacing {{isHidden ? 'on':''}}"> 
+      <view class="weui-flex" wx:for="{{tabs}}"  wx:key="*this">
+        <view class="weui-flex__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" id="{{index}}" bindtap="tabClick">
+          <view class="placeholder" >{{item.classifyName}}</view>
+        </view>
+      </view>        
+    </view>
+    <view class='arrows-box' bindtap='toggleArrows'>
+      <image src='../../images/icon/down.png' class='arrows' hidden='{{!isDown}}' ></image>
+      <image src='../../images/icon/top.png' class='arrows' hidden='{{isDown}}'></image>
+    </view>
+  </view>
+</view>
+<view class="content-box">
+  <view class="content-item WxMasonryView" wx:for="{{tabs}}" hidden="{{activeIndex != index}}">
+    <view class='full' hidden='{{isFull}}'>
+      <view class="WxMasonry" wx:for="{{activeIndex==0 ? all:classAll}}" id="{{index}}">
+        <view class="placeholder">
+          <navigator hover-class='none' url='../detail/detail?productId={{item.photoId}}'>
+            <image src="{{path}}/{{item.photoPoster}}" class='all-img fade_in'></image>
+          </navigator>
+          <view class='product-name'>{{item.productName}}</view>
+          <view class='order-now'>
+            <text >￥{{item.productPrice}}</text>
+            <navigator url="../detail/detail?productId={{item.photoId}}&buyNow=true" data-buy="" hover-class='none'>立即购买</navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='empty' hidden='{{!isFull}}'>
+      <image src='../../images/cart/1.png'></image>
+      <view>
+        该分类下目前还未上架商品，敬请期待！
+      </view>
+    </view>
+  </view>
+
+</view>
