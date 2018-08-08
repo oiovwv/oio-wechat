@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="gettrain-button">
+    <text bindtap="getTrainInfo1">卫视两微榜</text>
+  </view>
+    <view class="gettrain-button">
+    <text bindtap="getTrainInfo2">新闻两微榜</text>
+  </view>
+    <view class="gettrain-button">
+    <text bindtap="getTrainInfo1">综艺两微榜</text>
+  </view>
+    <view class="gettrain-button">
+    <text bindtap="getTrainInfo1">城市台两微榜</text>
+  </view>
+</view>

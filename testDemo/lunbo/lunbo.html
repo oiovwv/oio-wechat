@@ -1,0 +1,478 @@
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style type="text/css">
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            ul,ol{
+                list-style: none;
+            }
+            /*消除图片底部3像素距离*/
+            img{
+                vertical-align: top;
+            }
+            .scroll{
+                width: 500px;
+                height: 200px;
+                margin: 100px auto;
+                border: 1px solid #ccc;
+                padding: 7px;
+                overflow: hidden;
+                position: relative;
+            }
+            .box{
+                width: 500px;
+                height: 200px;
+                overflow: hidden;
+                position: relative;
+            }
+            .box ul{
+                width: 600%;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .box ul li{
+                float: left;
+            }
+            .scroll ol{
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+
+            }
+            .scroll ol li{
+                float: left;
+                width: 20px;
+                height: 20px;
+                background: pink;
+                text-align: center;
+                line-height: 20px;
+                border-radius: 50%;
+                background-color: pink;             
+                margin-left:10px ;
+                cursor: pointer;
+            }
+            .scroll ol li.current{
+                background-color: purple;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="scroll" class="scroll">
+            <div id="box" class="box">
+                <ul id="ul">
+                    <li><img src="img/1.jpg" width="500" height="200"></li>
+                    <li><img src="img/2.jpg" width="500" height="200"></li>
+                    <li><img src="img/3.jpg" width="500" height="200"></li>
+                    <li><img src="img/4.jpg" width="500" height="200"></li>
+                    <li><img src="img/5.jpg" width="500" height="200"></li>
+                </ul>
+                
+            </div>
+        </div>
+        <script>
+        	var scroll = document.getElementById("scroll"); // 获得大盒子
+	        var ul = document.getElementById("ul"); // 获得ul
+	        var ulLis = ul.children;// 获得ul的盒子 以此来生成ol中li的个数
+	        var liWidth = ul.children[0].offsetWidth;// 获得每个li的宽度
+	        // 操作元素
+	        // 因为要做无缝滚动，所以要克隆第一张，放到最后一张后面
+	        // 1. 克隆元素
+	        ul.appendChild(ul.children[0].cloneNode(true));
+
+	        // 2.创建ol 和li
+	        var ol = document.createElement("ol");//创建ol元素
+	        scroll.appendChild(ol);// 把ol放到scroll盒子里面去
+	        for (var i=0;i<ulLis.length-1;i++) {
+	            var li = document.createElement("li");// 创建li元素
+	            li.innerHTML = i + 1;// 给li里面添加文字  1 2 3 4 5
+	            ol.appendChild(li);// 将li元素添加到ol里面
+	        }
+	        ol.children[0].className = "current";// ol中的第一个li背景色为purple
+
+            var olLis=document.getElementsByTagName('ol')[0].children
+	        // 动画函数 第一个参数，代表谁动  第二个参数 动多少
+        // 让图片做匀速运动，匀速动画的原理是 当前的位置 + 速度  即 offsetLeft + speed
+
+        function animate(obj,target){
+            // 首先清除掉定时器
+            clearInterval(obj.timer);
+            // 用来判断 是+ 还是 -  即说明向左走还是向右走
+            var speed = obj.offsetLeft < target ? 15 : -15;
+            obj.timer = setInterval(function(){
+                var result = target - obj.offsetLeft;//它们的差值不会超过speed
+                obj.style.left = obj.offsetLeft + speed + "px";
+                // 有可能有小数的存在，所以在这里要做个判断             
+                if (Math.abs(result) <= Math.abs(speed)) {
+                    clearInterval(obj.timer);
+                    obj.style.left = target + "px";
+                }
+            },10);
+        }
+        var timer = null; // 轮播图的定时器
+        var key = 0;// 控制播放的张数
+        var circle = 0;// 控制小圆点
+
+        timer = setInterval(autoplay,3000);// 自动轮播
+        function autoplay(){
+            /*自动轮播时,要对播放的张数key进行一个判断,如果播放的张数超过ulLis.length-1,
+            就要重头开始播放.  因为我们克隆了第一张并将其放在最后面,所以我们要从第二张图片开始播放*/
+            key++; // 先++
+            if(key > ulLis.length-1){// 后判断
+
+                ul.style.left = 0; // 迅速调回
+                key = 1; // 因为第6张是第一张，所以播放的时候是从第2张开始播放
+            }
+            // 动画部分
+            animate(ul,-key*liWidth);
+            // 小圆点circle   当显示第几张图片是，对应的小圆点的颜色也发生变化 
+
+            /*同理,对小圆点也要有一个判断*/
+            circle++;
+            if (circle > olLis.length-1) {
+                circle = 0;
+            }
+            // 小圆点颜色发生变化
+            for (var i = 0 ; i < olLis.length;i++) {
+                // 先清除掉所用的小圆点类名
+                olLis[i].className = ""; 
+            }
+            // 给当前的小圆点 添加一个类名
+            olLis[circle].className = "current";
+
+        }
+        </script>
+    </body>
+</html>
+
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <style type="text/css">
+        *{
+            padding:0px;
+            margin: 0px;
+        }
+        #box{
+            width: 490px;
+            height: 170px;
+            overflow: hidden;
+            position: relative;
+            background-color: orange;
+        }
+        #box #mylist{
+            position: absolute;
+            width: 2450px;
+            left: 0px;
+            top: 0px;
+            list-style-type: none;
+        }
+        #box ul li{
+            float: left;
+        }
+        ul#underNum{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            background-color: yellow;
+            width: 150px;
+            height: 30px;
+            list-style-type: none;
+        }
+        ul#underNum li{
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            
+        }
+        ul#underNum li a{
+            text-decoration: none;
+        }
+    </style>
+    <body>
+        <div id="box">
+            <ul id="mylist">
+                <li><a><img src="img/1.jpg"></a></li>
+                <li><a><img src="img/2.jpg"></a></li>
+                <li><a><img src="img/3.jpg"></a></li>
+                <li><a><img src="img/4.jpg"></a></li>
+                <li><a><img src="img/5.jpg"></a></li>
+            </ul>
+            <ul id="underNum">
+                <li><a href="">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">4</a></li>
+                <li><a href="">5</a></li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            var timer=setInterval("hello()",2000);
+            var mylist=document.getElementById("mylist");
+            var num=document.getElementById("mylist").getElementsByTagName("li");
+            var now=0;
+            var left=0;
+            function hello(){
+                // body...
+                // document.write("ddd"+now);
+                if (left<=-(num.length-1)*490) {
+                    now=0;
+                    left=-now*490;
+                    mylist.style.left=left+"px";
+                    now=now+1;
+                }else{
+                    left=-now*490;
+                    mylist.style.left=left+"px";
+                    now=now+1;
+                };
+                
+            }
+            //移动的位置
+            function toCover(now1){
+                now=now1;
+                left=-now*490;
+                mylist.style.left=left+"px";
+                clearInterval(timer);
+                
+            }
+            var numli=document.getElementById("underNum").getElementsByTagName("li");
+            for (var i = 0; i <=numli.length - 1; i++) {
+                numli[i].index=i;
+                numli[i].onmouseover=function(){
+                    //alert(this.index);
+                    toCover(this.index);    
+                };
+                numli[i].onmouseout=function(){
+                    //alert(this.index);
+                    timer=setInterval("hello()",1000);
+                };
+            };
+        </script>
+    </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        ul{
+            margin: 0px;
+            padding: 0px;
+        }
+        ul li{
+            float: left;
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+        a{
+            margin: 0px;
+            padding: 0px;
+        }
+    
+        #wrapper{
+            margin: 0 auto;
+            width: 1280px;
+            height: 800px;
+            position: relative;
+        }
+        #imgs{
+            width: 1280px;
+            height: 100%;
+            overflow: hidden;
+            float: left;
+            position: relative;
+        }
+        #imgs ul{
+            position: absolute;
+            z-index: 1;
+            width: 7680px;
+            height: 400px;
+            left: -1280px;
+        }
+        #nav{
+            width: 100px;
+            height: 20px;
+            float: left;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            z-index: 5;
+        }
+        #nav ul li a{
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            display: inline-block;
+            background: #FFF;
+            border-radius: 10px;
+            margin-right: 5px;
+            text-align: center;
+            font-size: 12px;
+        }
+        #preous,#next{
+            width: 100px;
+            background: #000;
+            font-size: 20px;
+            font-weight: 900;
+            text-align: center;
+            height: 80px;
+            line-height: 80px;
+            position: absolute;
+            top: 50%;
+            color: #FFF;
+            z-index: 3;
+        }
+        #preous{
+            left: 0px;
+        }
+        #next{
+            right: 0px;
+        }
+        #nav ul li a.current{
+            background: red;
+            color: #FFF;
+        }
+        #nav ul li a.hidden{
+            background: #FFF;
+            color: #000;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="imgs">
+            <ul>
+                <li><a href=""><img src="img/4.jpg" alt=""></a></li>
+                <li><a href=""><img src="img/1.jpg" alt=""></a></li>
+                <li><a href=""><img src="img/2.jpg" alt=""></a></li>
+                <li><a href=""><img src="img/3.jpg" alt=""></a></li>
+                <li><a href=""><img src="img/4.jpg" alt=""></a></li>
+                <li><a href=""><img src="img/1.jpg" alt=""></a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div id="nav">
+            <ul>
+                <li><a class="current">1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+            </ul>
+        </div>
+        <div id="preous"><</div>
+        <div id="next">></div>
+    </div>
+    <script type="text/javascript">
+    //思路：1、先处理好左右两个按钮，来回切换，能够保证图片正常切换
+    //2、能正常来还切换之后，在来处理右下角的小圆点，跟随者图片切换来变化
+    //3、在切换中加上动画
+    //4、开启一个定时器，两秒调用一次右边按钮的onclick
+    //5、解决定时器和点击右边按钮以及图片切换动画定时器的冲突， 在点击按钮的时候，先停止轮播定时器和动画定时器， 
+    //（当前有可能上一张图片动画还未完成，然后又清除了动画，所以要把图片的left值设置是当前图片距离左边距）
+    //6、处理远点的onmouse事件，和点击左右两个按钮一致
+    // window.onload=function(){
+    //     var imgs_div=document.getElementById("imgs");
+    //     var nav_div=document.getElementById("nav");
+    //     //获取到图片轮播的ul对象数组
+    //     var imgsUl=imgs_div.getElementsByTagName("ul")[0];
+    //     //获取到远点的ul对象数组
+    //     var nav=nav_div.getElementsByTagName("ul")[0];
+    //     //上一个
+    //     var prious=document.getElementById("preous");
+    //     //下一个
+    //     var next =document.getElementById("next");
+    //     var timer;
+    //     var animTimer;
+    //     var index=1;
+    //     play();
+    //     prious.onclick=function(){
+    //         initImgs(index);
+    //         index-=1;
+    //         if(index<1){
+    //             index=4;
+    //         }
+    //         animate(1280);
+    //         btnShow(index);
+    //     }
+    //     next.onclick=function(){
+    //         initImgs(index);
+    //         index+=1;
+    //         if(index>4){
+    //             index=1;
+    //         }
+    //         animate(-1280);
+    //         btnShow(index);
+    //     }
+    //     function animate(offset){
+    //         var newLeft=parseInt(imgsUl.offsetLeft)+offset;
+    //         // imgsUl.style.left=newLeft;
+    //         // console.log("定时器外面:此时offsetLeft"+imgsUl.offsetLeft+">>newLeft:"+newLeft);
+    //         if(newLeft>-1280){
+    //             // imgsUl.style.left=-5120+"px";
+    //             donghua(-5120); 
+    //         }else if(newLeft<-5120){
+    //             // imgsUl.style.left=-1280+"px";
+    //             donghua(-1280); 
+    //         }else{
+    //             donghua(newLeft);
+    //         }
+    //     }
+    //     function donghua(offset){
+    //         clearInterval(animTimer);
+    //         animTimer=setInterval(function(){
+    //             imgsUl.style.left=imgsUl.offsetLeft+(offset-imgsUl.offsetLeft)/10 + "px";
+    //             if(imgsUl.offsetLeft-offset<10&&imgsUl.offsetLeft-offset>-10){//如果偏移量已经等于指定好的偏移量，则秦楚定时器
+    //                 imgsUl.style.left=offset+"px";
+    //                 clearInterval(animTimer);
+    //                 //开启定时轮播
+    //                 play();         
+    //             }
+    //         },20);
+    //     }
+    //     function initImgs(cur_index){
+    //         clearInterval(timer);
+    //         clearInterval(animTimer);
+    //         var off=cur_index*1280;
+    //         imgsUl.style.left=-off+"px";
+    //     }
+    //     function play(){
+    //         timer=setInterval(function(){
+    //             next.onclick();
+    //         },2000)
+    //     }
+    //     function btnShow(cur_index){
+    //         var list=nav.children;
+    //         for(var i=0;i<nav.children.length;i++){
+    //             nav.children[i].children[0].className="hidden";
+    //         }
+    //         nav.children[cur_index-1].children[0].className="current";
+    //     }
+    //     for(var i=0;i<nav.children.length;i++){
+    //         nav.children[i].index=i;
+    //         var sd=nav.children[i].index;
+    //         nav.children[i].onmouseover=function(){
+    //             index=this.index+1;
+    //             initImgs(this.index+1);
+    //             btnShow(this.index+1);
+    //         }
+    //         nav.children[i].onmouseout=function(){
+    //             play();
+    //         }
+    //     }
+        
+    // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+
+    <view bindtap="choiceItem" data-item="2" class="chioce-item" hover-class="click-once-opaque">{{activeSortingName}}
+      <image class="icon-chioce" src="{{sortingChioceIcon}}"></image>
+    </view>
+<view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}">
+      <view wx:for="{{sortingList}}" catchtap="selectSorting" data-index="{{index}}" class="sorting-item" hover-class="click-once">  
+      {{item.value}}
+      </view>
+    </view>
+
+
+<view class="containerss">
+   <view class="tr bg-w">
+    <view class="th wa-grid-33">排名</view>
+    <view class="th wa-grid-33">微博指数ZBI</view>
+    <view class="th wa-grid-44">原创微博传播度</view>
+    <view class="th wa-grid-33">综合传播度</view>
+    <view class="th wa-grid-33">活跃度</view>
+    <view class="th wa-grid-33">关注度</view>
+   </view>
+   <block wx:for="{{listData}}" wx:key="{{Row}}">
+    <view class="tr bg-g bg-ss" wx:if="{{index % 2 == 0}}">
+      <view class="tdall">
+      <view class="tdone">{{item.Row}}</view>
+      <view class="tdtwo">{{item.Tvid}}</view>
+      <view class="tdthr">{{item.ShortName}}</view>
+      </view>
+      <view class="td">{{item.Wbhitszbi}}</view>
+      <view class="tdwit">{{item.Webid}}</view>
+      <view class="td">{{item.WbactiveNumber}}</view>
+       <view class="td">{{item.WbactiveNumber}}</view>
+        <view class="td">{{item.WbactiveNumber}}</view>
+    </view>
+    <view class="tr bg-ss" wx:else>
+      <view class="tdall"> 
+      <view class="tdone">{{item.Row}}</view>
+      <view class="tdtwo">{{item.Tvid}}</view>
+      <view class="tdthr">{{item.ShortName}}</view>
+      </view>
+      <view class="td">{{item.Wbhitszbi}}</view>
+      <view class="tdwit">{{item.Webid}}</view>
+      <view class="td">{{item.WbactiveNumber}}</view>
+       <view class="td">{{item.WbactiveNumber}}</view>
+        <view class="td">{{item.WbactiveNumber}}</view>
+    </view>
+  </block>
+  <view class="load_end" hidden="{{!loaded}}">没有更多数据了……</view>
+</view>

@@ -1,0 +1,6 @@
+.container{
+    width:18.75rem;
+    min-height:6.64rem;
+    background: url(../images/redbg.png) no-repeat;
+    background-size: 100% 100%;
+}

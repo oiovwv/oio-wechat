@@ -1,0 +1,72 @@
+<view class='flex-vert full-fill'>
+  <view class="heads">
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==87 ? 'on' : ''}}" data-current="87" bindtap="swichNav">微博</view>
+      <view class="swiper-tab-list {{currentTab==88 ? 'on' : ''}}" data-current="88" bindtap="swichNav">微信</view>
+    </view>
+    <picker mode="date" value="{{maxdate}}" start="{{mindate}}" end="{{maxdate}}" bindchange="bindDateChange">
+      <view class="picker oker">
+        <view class="fb-type">
+          <view class="type-label">
+            {{date}}
+          </view>
+          <image class="type-icon" src="{{dateChioceIcon}}"></image>
+        </view>
+      </view>
+    </picker>
+    <view class="page">
+      <view class="nav">
+        <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
+          <view class="content">{{bdname}}</view>
+          <view class="icon"></view>
+        </view>
+      </view>
+      <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
+        <view class="qy quyu-left">
+          <view class="{{select1 == index ? 'current' : ''}}" wx:for="{{cityleft}}" bindtap="selectleft" data-city='{{index}}'>
+            {{item.OneTypeName}}
+          </view>
+        </view>
+        <view class="qy quyu-center">
+          <view class="{{select2 == index ? 'current2' : ''}}" wx:for="{{citycenter}}" bindtap="selectcenter" data-city='{{index}}'>
+            {{item.TwoTypeName}}
+          </view>
+        </view>
+        <view class="qy quyu-right">
+          <view class="{{select3 == index ? 'current2' : ''}}" wx:for="{{cityright}}" bindtap="selectright" data-city='{{index}}'>
+            {{item.TreeTypeName}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="full-fill flex-vert">
+    <!--fbox start-->
+    <view class='flex-vert' style='width:100%;height:100%'>
+      <view class="fbox_container sbox_one2 flex-horiz" style="width:100%;height:auto">
+        <view class="sbox_one border-double" style="width:{{sf.one_width}}px;height:{{sf.one_height}}px;"> 排名 </view>
+        <view class="sbox_one border-double" style="width:{{sf.onemc_width}}px;height:{{sf.one_height}}px;"> 名称 </view>
+        <scroll-view scroll-x='true' class='flex-horiz' scroll-left='{{left}}' style='width:10%;flex-grow:1;padding-right:20px'>
+          <view class='flex-horiz' style="position:absolute;left:-{{cf.pleft}}px;width:{{tabIDArray[tabIndex].length*120-100}}px;" bindtouchstart="et_touch_start_cf" bindtouchmove="et_touch_move_cf" bindtouchend="et_touch_end">
+            <view wx:for="{{tabArray[tabIndex]}}" class="sbox_two border-double" style="min-width:120px;height:32px">{{item}}</view>
+          </view>
+        </scroll-view>
+      </view>
+      <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" style='height:20%;flex-grow:1'>
+        <view wx:for="{{tabIndex==0?listData:listWxData}}">
+          <view class="flex-horiz {{index%2==0?'list_row_even':''}}" style="text-align:center;">
+            <text class="list_row border-double" style="width:{{sf.three_width}}px">{{item.Row}}</text>
+            <text class="list_row border-double" style="width:{{sf.threemc_width}}px;">{{item.ShortName}}</text>
+            <view class="sbox_four" style="width:{{cf.four_width}}px;height:auto;">
+              <view class='flex-horiz' style="position:absolute;left:-{{cf.pleft}}px;width:{{tabIDArray[tabIndex].length*120-100}}px;" bindtouchstart="et_touch_start_cf" bindtouchmove="et_touch_move_cf" bindtouchend="et_touch_end">
+                <view wx:for="{{tabIDArray[tabIndex]}}" wx:for-item="numItem" class="sbox_two_item border-double" style="min-width:120px;height:32px">{{item[numItem]}}</view>
+              </view>
+            </view>
+            <view class="fn-clear"></view>
+          </view>
+        </view>
+        <view class="sbox_three" style="width:{{sf.threemc_width}}px;height:0px;" />
+      </scroll-view>
+    </view>
+  </view>
+  </view>

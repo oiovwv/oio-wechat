@@ -1,0 +1,127 @@
+<view class="heads">
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==87 ? 'on' : ''}}" data-current="87" bindtap="swichNav">微博</view>
+  <view class="swiper-tab-list {{currentTab==88 ? 'on' : ''}}" data-current="88" bindtap="swichNav">微信</view>
+</view>
+<picker mode="date" value="{{maxdate}}" start="{{mindate}}" end="{{maxdate}}" bindchange="bindDateChange">
+ <view class="picker oker">
+ <view class="fb-type">
+ <view class="type-label">
+  {{date}}
+ </view>
+ <image class="type-icon" src="{{dateChioceIcon}}"></image>
+  </view>
+ </view>
+ </picker>
+<view class="page">
+    <view class="nav">
+        <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
+            <view class="content">{{bdname}}</view>
+            <view class="icon"></view>
+        </view>
+    </view>
+    <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
+        <view class="qy quyu-left">
+            <view class="{{select1 == index ? 'current' : ''}}" wx:for="{{cityleft}}" bindtap="selectleft" data-city='{{index}}'>
+                {{item.OneTypeName}}
+            </view>
+        </view>
+        <view class="qy quyu-center">
+            <view class="{{select2 == index ? 'current2' : ''}}" wx:for="{{citycenter}}" bindtap="selectcenter" data-city='{{index}}'>
+                {{item.TwoTypeName}}
+            </view>
+        </view>
+        <view class="qy quyu-right">
+            <view class="{{select3 == index ? 'current2' : ''}}" wx:for="{{cityright}}" bindtap="selectright" data-city='{{index}}'>
+                {{item.TreeTypeName}}
+            </view>
+        </view>
+    </view>
+</view>
+</view>
+
+
+<view class="{{selected?'show':'hidden'}}">
+<view class="containerss">
+   <view class="tr bg-w">
+ <view class="th pm">排名</view>
+    <view class="th wa-grid-33">ZBI指数</view>
+    <view class="th wa-grid-44">原创传播度</view>
+    <view class="th wa-grid-33">综合传播度</view>
+    <view class="th wa-grid-33">活跃度</view>
+    <view class="th wa-grid-33">关注度</view>
+   </view>
+   <block wx:for="{{listData}}" wx:key="{{Row}}">
+    <view class="tr bg-g bg-ss" wx:if="{{index % 2 == 0}}">
+      <view class="tdall">
+       <view class="tdrank">{{item.Row}}</view>
+      <view class="tdname">{{item.ShortName}}sdsafsdfdsafsdf</view>
+      </view>
+       <view class="td">{{item.Wbhitszbi}}</view>
+      <view class="tdwbwit">{{item.WbycspreadNumber}}</view>
+      <view class="td">{{item.WbzhspreadNumber}}</view>
+       <view class="td">{{item.WbactiveNumber}}</view>
+        <view class="td">{{item.WbfollowNumber}}</view>
+    </view>
+    <view class="tr bg-ss" wx:else>
+      <view class="tdall"> 
+       <view class="tdrank">{{item.Row}}</view>
+      <view class="tdname">{{item.ShortName}}</view>
+      </view>
+      <view class="td">{{item.Wbhitszbi}}</view>
+      <view class="tdwbwit">{{item.WbycspreadNumber}}</view>
+      <view class="td">{{item.WbzhspreadNumber}}</view>
+       <view class="td">{{item.WbactiveNumber}}</view>
+        <view class="td">{{item.WbfollowNumber}}</view>
+    </view>
+  </block>
+  <view class="load_end" hidden="{{!loaded}}">没有更多数据了……</view>
+</view>
+</view>
+
+<scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%">
+<view class="{{selected1?'show':'hidden'}}">
+<view class="containerss">
+   <view class="trwx bg-w">
+    <view class="th wxpm">排名</view>
+    <view class="th wa-grid-wx33">ZCI指数</view>
+    <view class="th wa-grid-wx44">原创文章传播度</view>
+    <view class="th wa-grid-wx44">头条文章传播度</view>
+    <view class="th wa-grid-wx44">爆款文章传播度</view>
+    <view class="th wa-grid-wx33">综合传播度</view>
+    <view class="th wa-grid-wx33">活跃度</view>
+
+   </view>
+   <block wx:for="{{listData}}" wx:key="{{code}}">
+    <view class="trwx bg-g bg-ss" wx:if="{{index % 2 == 0}}">
+      <view class="tdwxall">
+       <view class="tdrank">{{item.Row}}</view>
+      <view class="tdname">{{item.ShortName}}</view>
+      </view>
+      <view class="tdwx">{{item.Wxhitszci}}</view>
+      <view class="tdwit">{{item.WxYcSpreadNumber}}</view>
+      <view class="tdwit">{{item.WxHeadSpreadNumber}}</view>
+      <view class="tdwit">{{item.WxHotSpreadNumber}}</view>
+      <view class="tdwx">{{item.SpreadNumber}}</view>
+      <view class="tdwx">{{item.WxactiveNumber}}</view>
+
+    </view>
+    <view class="trwx bg-ss" wx:else>
+      <view class="tdwxall"> 
+       <view class="tdrank">{{item.Row}}</view>
+      <view class="tdname">{{item.ShortName}}</view>
+      </view>
+       <view class="tdwx">{{item.Wxhitszci}}</view>
+      <view class="tdwit">{{item.WxYcSpreadNumber}}</view>
+      <view class="tdwit">{{item.WxHeadSpreadNumber}}</view>
+          <view class="tdwit">{{item.WxHotSpreadNumber}}</view>
+      <view class="tdwx">{{item.SpreadNumber}}</view>
+      <view class="tdwx">{{item.WxactiveNumber}}</view>
+  
+    </view>
+  </block>
+    <view class="load_end" hidden="{{!loaded}}">没有更多数据了……</view>
+</view>
+</view>
+</scroll-view>
+

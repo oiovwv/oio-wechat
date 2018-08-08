@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#wrapper{
+			width: 200px;
+		    height: 80px;
+		    padding: 10px;
+		    background: rgb(255, 187, 51);
+		    display: flex;
+	        justify-content: center;
+	        align-items: center;
+	        color: #fff;
+	        font-size: 14px;
+	        
+		}
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		content
+	</div>
+	
+	<input type="text" id='input'>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+	
+	$('#input').click(()=>{
+		console.log(this);
+		console.log('aaaa');
+		$('#input').attr('readonly',true);
+	})
+
+
+
+
+</script>
+<script type="text/javascript">
+	
+		if($.trim($("#visitTheme").val())==''){
+			$(".visitThemeTips").html("拜访主体不能为空！");
+			return;
+		}
+		// 添加 / 修改去除-1值
+		else if ($.trim($("visitTheme").val())=='-1') {
+			
+			$(".visitThemeTips").html("请选择");
+			return;
+
+		}else{
+			visitTheme=$.trim($("#visitTheme").val());
+		}
+</script>
+<script>
+	// 待处理数值 
+var data = [
+    ｛addr:"1167888广东省广",now:"2018-05-19 12:00:47",number:1,ordernumber:"5767620180519",phone:null,photoPoster:"product/niu/niuPoster.jpg",productExplain:"片",productId:null,productName:"牛排",productPrice:1053,status:"1"｝,
+    ｛addr:"1167888广东省广",now:"2018-05-19 12:00:47",number:2,ordernumber:"5767620180519",phone:null,photoPoster:"product/sanwen/sanwenPoster.jpg",productExplain:"片",productId:null,productName:"三文鱼",productPrice:53,status:"1"｝,
+
+    ｛addr:"1167888广东省广",now:"2018-05-19 12:05:46",number:1,ordernumber:"3125620180519",phone:null,photoPoster:"product/niu/niuPoster.jpg",productExplain:"个",productId:null,productName:"猪蹄",productPrice:124,status:"2"｝,
+
+    ｛addr:"1167888广东省广",now:"2018-05-19 12:10:22",number:1,ordernumber:"5454620180519",phone:null,photoPoster:"product/niu/niuPoster.jpg",productExplain:"瓶",productId:null,productName:"红酒",productPrice:8888,status:"3"｝,
+    ｛addr:"1167888广东省广",now:"2018-05-19 12:10:22",number:1,ordernumber:"5454620180519",phone:null,photoPoster:"product/niu/niuPoster.jpg",productExplain:"袋",productId:null,productName:"坚果",productPrice:50,status:"3"｝,
+    ｛addr:"1167888广东省广",now:"2018-05-19 12:10:22",number:1,ordernumber:"5454620180519",phone:null,photoPoster:"product/niu/niuPoster.jpg",productExplain:"盒",productId:null,productName:"抽纸",productPrice:12,status:"3"｝
+    ]
+   
+// 递归函数
+function headFor(o, cb){
+    if (!o) return; 
+
+    o.forEach(child => {
+        cb(child); 
+        if (child.children) {
+            headFor(child.children, cb);    
+        }
+    });
+}
+
+// 遍历 data 的结果保存在 res 
+var res = []; 
+
+// 调用 递归函数headFor  （注意 第二个参数是函数）
+headFor(data, item => {
+    var temp = {}; 
+    temp.id = item.id
+    temp.number = item.number;
+    temp.name = item.name; 
+    temp.level = item.level; 
+    res.push(temp); 
+}); 
+
+// 告诉数组怎么判断两个元素 然后让他数组自己去干 
+res.sort((a, b) => {
+    return a.id > b.id; 
+}); 
+
+// 打印 
+res.forEach(e => console.log(e)); 
+console.log(JSON.stringify(res)); 
+</script>
+</html>

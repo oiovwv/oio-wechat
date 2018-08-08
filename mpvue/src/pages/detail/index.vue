@@ -122,6 +122,8 @@
                 <div @click="showDialog('立即购买')">立即购买</div>
             </div>
         </div>
+
+        <!-- 这是组件 -->
         <operate :isShowDialog="hasDialog" @hDialog="hideDialog" :productId="productId"></operate>
     </div>    
 </template>

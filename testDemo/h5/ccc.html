@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xxx</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    #app{
+      margin-top: 1.92rem;
+      display: flex;
+      flex-direction: row;
+    }
+    .left{
+      width: 4rem;
+      display: flex;
+      flex-direction: column;
+      background: #f7f7f7;
+    }
+    .left div{
+      height:3rem;
+      font-size: 32px;
+      text-align: center;
+      line-height: 3rem;
+    }
+    .right{
+    }
+    .on{
+      background: white;
+    }
+    .right-top{
+      width: 7rem;
+      margin-left: .5rem;
+    }
+    .right-top img{
+      border-radius: .4rem .4rem .4rem .4rem;
+    }
+    .right-content{
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid red;
+      padding-left: .5rem;
+      width: 14rem;
+      margin-top: .2rem;
+    }
+    .shop-img img{
+      width: 4rem;
+      height: 6rem;
+    }
+    .shop-text{
+      padding-left: .5rem;
+    }
+    .shop-text p span{
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      display: inline-block;
+      background-color: green;
+      color: white;
+      font-size: 36px;
+      line-height: 0.8rem;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="left">
+    <div v-for="(item,index) in navMenu" @click="go(index)" :class="[count==index ? 'on' :'']">
+      {{item.title}}
+    </div>
+  </div>
+  <div class="right">
+    <div class="right-top">
+      <img src="http://img.weimob.com/static/f6/1c/50/image/20140427/20140427195404_36947.jpg">
+    </div>
+    <div class="right-content" v-for="items in newgoods.children">
+       <div class="shop-img">
+         <img src="http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg" />
+       </div>
+       <div class="shop-text">
+          <h3>{{items.title}}</h3>
+          <h5>{{items.inventory}}</h5>
+          <p style="margin-top: .8rem">价格 xxxxx   <span> + </span></p>
+       </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      count:'0',
+      newgoods:'',
+      navMenu:[
+        {id:1,classifyId:0,title:'全部分类'},
+        {id:2,classifyId:1,title:'分类二哈'},
+        {id:3,classifyId:2,title:'分类三其'},
+        {id:4,classifyId:3,title:'分类四切'},
+        {id:5,classifyId:4,title:'分类五花'},
+        {id:6,classifyId:5,title:'分类六六'},
+        {id:7,classifyId:6,title:'分类七上'},
+        {id:8,classifyId:7,title:'分类八下'}
+      ],
+      goods:[
+        { name: '全部分类', classifyId: 0, children:
+            [
+              { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片飞机撒谎附近撒改变开始基本功', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32},
+              { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片2', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12},
+              { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片4', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 },
+              { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片5', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 },
+              { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片6', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 },
+              { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片7', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 },
+              { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片8', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 },
+            ]
+        },
+        { name: '分类2', classifyId: 1, children:[
+            //   { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片2', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 }
+          ]},
+        {name: '分类3', classifyId: 2, children:
+            [
+              { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片3',number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 }
+            ]
+        },
+        {
+          name: '分类4', classifyId: 3, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片1', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 },
+            { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片2', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 }] },
+        { name: '分类5', classifyId: 4, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片5', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 }, { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片4', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 }]},
+        { name: '分类6', classifyId: 5, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片6', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 }] },
+        { name: '分类7', classifyId: 6, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片7', number: 10 ,inventory:'1瓶/300ml',oldPrice:15,newPrice:12}]},
+        { name: '分类8', classifyId: 7, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片8', number: 10,inventory:'1瓶/300ml',oldPrice:15,newPrice:12 }]  }
+      ]
+    },mounted() {
+      this.newgoods=this.goods[0];
+    }
+    ,methods:{
+      go(index){
+        console.log(index)
+        this.count=index;
+        this.newgoods=this.goods[index];
+      }
+    }
+  });
+  let htmlwidth = document.documentElement.clientWidth || document.body.clientWidth;
+  let htmlDom = document.getElementsByTagName('html')[0];
+  if(htmlwidth>375){htmlwidth=375}
+  //      alert(htmlwidth)
+  htmlDom.style.fontSize = htmlwidth/7.5 +'px'; //1rem =100 px
+</script>
+</body>
+</html>

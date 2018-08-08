@@ -1,0 +1,247 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport"   content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+     <title>Document</title>
+     <style>
+         * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    
+    #container {
+        margin: 20px;
+        width: 600px;
+        height: 400px;
+        border: 3px solid #333;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #list {
+        /*七张图片*/
+        width: 4200px;
+        height: 400px;
+        position: absolute;
+
+        z-index: 1;
+    }
+    
+    #list img {
+        float: left;
+        width: 600px;
+        height: 400px;
+    }
+    
+    #buttons {
+        position: absolute;
+        height: 10px;
+        width: 100px;
+        z-index: 2;
+        bottom: 20px;
+        right: 100px;
+    }
+    
+    #buttons span {
+        cursor: pointer;
+        float: left;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        height: 10px;
+        width: 10px;
+        margin-right: 5px;
+        background: #333;
+    }
+    
+    #buttons .on {
+        background: orangered;
+    }
+    
+    .arrow {
+        display: none;
+        cursor: pointer;
+        line-height: 40px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        z-index: 2;
+        top: 180px;
+        color: #fff;
+        background-color: RGBA(0, 0, 0, .3);
+    }
+    
+    .arrow:hover {
+        background-color: RGBA(0, 0, 0, .7);
+    }
+    
+    #container:hover .arrow {
+        display: block;
+    }
+    
+    #pre {
+        left: 20px;
+    }
+    
+    #next {
+        right: 20px;
+    }
+
+     </style>
+ </head>
+ <body>
+     
+<div id="container">
+        <div id="list" style="left:-600px">
+
+        </div>
+        <div id="buttons">
+
+        </div>
+        <a href="javascript:;" class="arrow" id="pre"><</a>
+        <a href="javascript:;" class="arrow" id="next">></a>
+    </div>
+    <script>
+        function g(id) {
+            return document.getElementById(id);
+        }
+        window.onload = function() {
+            var next = g("next");
+            var list = g("list");
+
+            var pre = g("pre");
+            var buttons = g("buttons").getElementsByTagName("span");
+            
+            var index = 1;
+            var interval=3000;
+            var animated = false;
+            var timer; //全局变量
+
+            var imgList=['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg']
+            console.log(imgList.length)
+            var len = imgList.length;
+            var imgHtml='';
+            for (var i = 0; i < imgList.length; i++) {
+                imgHtml+=`<img src="img/${imgList[i]}"  />`
+            }
+            list.innerHTML=imgHtml
+            list.appendChild(list.children[0].cloneNode(true))
+            var newNode=list.appendChild(list.children[4].cloneNode(true))
+            list.insertBefore(newNode,list.children[0]);
+     
+            var btnHtml=''
+            for (var i = 0; i < imgList.length; i++) {
+                btnHtml+=`<span index="${i+1}"></span>`
+            }
+            g('buttons').innerHTML=btnHtml
+            g('buttons').children[0].className='on'
+            /*按钮显示*/
+
+
+            function showButton() {
+                for (var i = 0; i < buttons.length; i++) {
+                    if (buttons[i].className == "on") {
+                        buttons[i].className = "";
+                        break;
+                    }
+                }
+                buttons[index -1].className = "on";
+            }
+     
+            /*图片切换动画*/
+            function animate(offset) {
+                if (offset == 0) {
+                    return;
+                }
+                animated = true;
+                var newLeft = parseInt(list.style.left) + offset;
+                console.log(newLeft)
+                var time = 300; //位移总时间
+                var interval = 10; //位移间隔时间
+                var speed = offset / (time / interval); //每次位移量
+                console.log(speed)
+                function go() {
+                    if ((speed < 0 && parseInt(list.style.left) > newLeft) || (speed > 0 && parseInt(list.style.left) < newLeft)) {
+                        list.style.left = parseInt(list.style.left) + speed + 'px';
+                        setTimeout(go, interval);
+                    } else {
+                        list.style.left = newLeft + 'px';
+                        /*如果当前是第五张图，就跳到第一张图*/
+                        if (newLeft > -200) {
+                            list.style.left = -600 * len + 'px';
+                        }
+                        if (newLeft < (-600 * len)) {
+                            list.style.left = '-600px';
+                        }
+                        animated = false;
+                    }
+                }
+                go();
+            }
+     
+            next.onclick = function() {
+                if (index == 5) {
+                    index = 1;
+                } else {
+                    index += 1;
+                }
+                showButton()
+                if (!animated) {
+                    animate(-600);
+                }
+            }
+            pre.onclick = function() {
+                if (index == 1) {
+                    index = 5;
+                } else {
+                    index -= 1;
+                }
+                showButton();
+                if (!animated) {
+                    animate(600);
+                }
+            }
+     
+            /*按钮切换*/
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function() {
+                    if (animated) {
+                        return false;
+                    }
+                    if (this.className == "on") {
+                        return false;
+                    }
+                    var myIndex = parseInt(this.getAttribute("index"));
+                    var offset = 600 * (myIndex - index);
+                    animate(offset);
+                    index = myIndex;
+                    showButton();
+                }
+            }
+     
+            /*自动切换*/
+            function autoPlay() {
+                 timer = setInterval(function(){
+                    next.onclick();
+                }, interval);
+            }
+     
+            function stop() {
+                clearInterval(timer);
+            }
+     
+            g("container").onmouseover = stop;
+            g("container").onmouseout = autoPlay;
+            autoPlay();
+        }
+    </script>
+ </body>
+ </html>
+
+
+
+ 

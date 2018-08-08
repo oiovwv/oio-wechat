@@ -4,31 +4,31 @@
         <div class='box'>
             <div class='left-nav'>
                 <scroll-div scroll-y style='height:19.3em;' class='menu'>
-                <div v-for="(classifyBtn,index) in menu"  class="left-nav-btn" :key="index"  
-                @click='toggle(index)' :class="scrollNum==index?'on':''">
-                    {{classifyBtn}}
-                </div>
+                    <div v-for="(classifyBtn,index) in navMenu"  class="left-nav-btn" :key="index"  
+                    @click='toggleNav(index)' :class="navActiveId==index?'on':''">
+                        {{classifyBtn}}
+                    </div>
                 </scroll-div>
             </div>
             <div class='right-content'>
-                <scroll-view  scroll-y style='height:1026rpx;' 
-                    :scroll-top="scrollTop" @scroll="scroll" :scroll-into-view="toView">
-                <div v-for="(good,index) in goods" :key="index" :id="good.id">
-                    <label class="typename">{{good.name}}</label>
-                    <div class='right-content-item' v-for="(item,i) in good.children" :key="i">
-                    <div class='item-box'>
-                        <image :src='item.img' class="thumb" />
-                        <div>
-                            <text>{{item.name}}</text>
-                            <div>销量：{{item.number}}</div>
+                <scroll-view  scroll-y :style="{height:winHeight+'px'}" 
+                    :scroll-top="scrollTop" @scroll="scroll" :scroll-into-view="contentActiveId">
+                    <div v-for="(good,index) in goods" :key="index" :id="good.id">
+                        <label class="typename">{{good.name}}</label>
+                        <div class='right-content-item' v-for="(item,i) in good.children" :key="i">
+                        <div class='item-box'>
+                            <image :src='item.img' class="thumb" />
                             <div>
-                                <span>￥{{item.price}}</span>
-                                <image src="../../static/images/icon/buy.png" alt="" class="buy" />
+                                <text>{{item.name}}</text>
+                                <div>销量：{{item.number}}</div>
+                                <div>
+                                    <span>￥{{item.price}}</span>
+                                    <image src="../../static/images/icon/buy.png" alt="" class="buy" />
+                                </div>
                             </div>
                         </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
                 </scroll-view>
             </div>
         </div>
@@ -39,13 +39,15 @@ import search from '../../components/search'
 export default {
     data(){
         return {
-            scrollNum: 0,
+            winHeight:0,
+            navActiveId: 0,
+            contentActiveId:'food',
             scrollTop: 0,
             typeHeight: 46,
             goodHeight: 88,
-            toView:'food',
-            menu: ['瓜果蔬菜', '粮油米面', '分类3', '分类4', '分类5', '分类6', '分类7', '分类8'],
-            menuType: ['food', 'dust', 'bowl', 'cages', 'toys', 'tools','aa','bb'],
+            
+            navMenu: ['瓜果蔬菜', '粮油米面', '分类3', '分类4', '分类5', '分类6', '分类7', '分类8'],
+            // contentType: ['food', 'dust', 'bowl', 'cages', 'toys', 'tools','aa','bb'],
             goods: [
                 {
                     name: '瓜果蔬菜', id:'food' , children:
@@ -82,31 +84,35 @@ export default {
     components:{
         search
     },
+    onReady(){
+        wx.getSystemInfo({
+            success:(res)=>{
+                this.winHeight=res.windowHeight
+            }
+        })
+    },
     methods:{
-        toggle(index){
-            // console.log(index)
-            this.scrollNum=index
-            console.log(this.scrollNum)
-            let viewTxt=this.menuType[index]
-            this.toView=viewTxt
-            console.log(this.toView)
+        toggleNav(index){
+            this.navActiveId=index
+            this.contentActiveId=this.goods[index].id
         },
         scroll(e){
             // console.log(e)
-            let heightList = [0];
-            let curHeight = 0;
-            this.goods.forEach((item) => {
-                curHeight += (this.typeHeight + item.children.length * this.goodHeight);
-                // console.log(curHeight)
-                heightList.push(curHeight);
-                // console.log(heightList)
-            })
-            for (let i = 0; i < heightList.length; i++) {
-                // console.log(this)
-                if (e.mp.detail.scrollTop >= heightList[i] && e.mp.detail.scrollTop < heightList[i + 1]) {
-                    this.scrollNum=i
-                }
-            }
+            // let heightList = [0];
+            // let curHeight = 0;
+            // this.goods.forEach((item) => {
+            //     curHeight += (this.typeHeight + item.children.length * this.goodHeight);
+            //     // console.log(curHeight)
+            //     heightList.push(curHeight);
+            //     // console.log(heightList)
+            // })
+            // for (let i = 0; i < heightList.length; i++) {
+            //     // console.log(this)
+            //     if (e.mp.detail.scrollTop >= heightList[i] && e.mp.detail.scrollTop < heightList[i + 1]) {
+            //         this.scrollNum=i
+            //     }
+            // }
+
         }
     }
 }

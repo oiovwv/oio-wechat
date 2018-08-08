@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/site/index",
+    "pages/Test/Test",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/flash/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "泽传媒",
+    "navigationBarTextStyle": "black"
+  }
+}

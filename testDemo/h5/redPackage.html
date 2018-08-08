@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>扫码领红包</title>
+    <script src="js/flexible.debug.js"></script>
+    <script src="js/flexible_css.debug.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .panel>div,.price{
+            display: flex;
+        }
+        .left_nav{
+            float: left;
+            width: 27%;
+        }
+        .right_content{
+            float: left;
+            width: 73%;
+            /* flex: 1; */
+        }
+        .right_content>div>img{
+            width: 100%;
+            border-radius:.8rem; 
+            padding: .3rem .4rem 0;
+            box-sizing: border-box;
+        }
+        .left_nav>ul>li{
+            padding: .5rem;
+            text-align: center;
+            border-bottom:1px solid #fcfcfc;
+            background:#fbf0f0;
+            box-sizing: border-box;
+            
+        }
+        .left_nav>ul>li.active{
+            border-left:5px solid #ff6464;
+            background: #fff;
+            color: #ff6464; 
+            
+            
+        }
+        .panel.active{
+            display: none;
+        }
+        .panel>div{
+            padding:.3rem .4rem;
+            border-bottom: 1px solid #eee;
+        }
+        .panel.active{
+            display: none;
+        }
+        .panel>div>div{
+            width: 4.3rem;
+        }
+        .panel>div>img{
+            width: 2rem;
+            height:2rem;
+            border-radius:50%; 
+            margin-right:.2rem;
+        }
+        .title{
+            font-size: 15px;
+            color:#333;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
+        .inventory{
+            margin-bottom:.4rem; 
+        }
+        .inventory>span:last-child{
+            color: #ff6464;
+            margin-left: .2rem;
+        }
+        .price{
+            justify-content: space-between;
+        }
+        .price>div>span:not(:last-child){
+            color: orange;
+            font-size: 18px;
+        }
+        .price>div>span:last-child{
+            color: #666;
+            text-decoration: line-through;
+        }
+        .add{
+            background: #08c299;
+            color: #fff;
+            width: .6rem;
+            height: .6rem;
+            font-size: 14px;
+            border-radius:50%;
+            text-align: center; 
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="left_nav">
+    	<ul></ul>
+    </div>
+    <div class="right_content">
+        <div>
+            <img src="http://img.weimob.com/static/f6/1c/50/image/20140427/20140427195404_36947.jpg" alt="">
+        </div>
+    </div>
+</div>
+<script>
+    let navMenu=[
+        {id:1,classifyId:0,title:'全部分类'},
+        {id:2,classifyId:1,title:'分类二哈'},
+        {id:3,classifyId:2,title:'分类三其'},
+        {id:4,classifyId:3,title:'分类四切'},
+        {id:5,classifyId:4,title:'分类五花'},
+        {id:6,classifyId:5,title:'分类六六'},
+        {id:7,classifyId:6,title:'分类七上'},
+        {id:8,classifyId:7,title:'分类八下'}
+    ]
+    let goods=[
+      { name: '全部分类', classifyId: 0, children: 
+        [
+            { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片飞机撒谎附近撒改变开始基本功', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32}, 
+            { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片2', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32},
+            { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片4', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 }, 
+            { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片5', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 },
+            { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片6', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 },
+            { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片7', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 },
+            { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片8', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 },
+        ]
+      },
+      { name: '分类2', classifyId: 1, children:[
+    //   { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片2', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 }
+      ]},
+      {name: '分类3', classifyId: 2, children:
+        [
+          { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片3',number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 }
+        ]
+      },
+      {
+        name: '分类4', classifyId: 3, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片1', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 },
+        { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片2', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 }] },
+      { name: '分类5', classifyId: 4, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片5', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 }, { img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片4', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 }]},
+      { name: '分类6', classifyId: 5, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片6', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 }] },
+      { name: '分类7', classifyId: 6, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片7', number: 10 ,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32}]},
+      { name: '分类8', classifyId: 7, children: [{ img: 'http://img4.imgtn.bdimg.com/it/u=1817078193,1178912899&fm=27&gp=0.jpg', name: '图片8', number: 10,inventory:'1瓶/300ml',oldPrice:15.96,newPrice:12.32 }]  }
+    ]
+
+    let navHtml=''
+    for(let i=0;i<navMenu.length;i++){
+        navHtml+=`<li class="">${navMenu[i].title}</li>`
+    }
+    $('.left_nav>ul').html(navHtml)
+   
+    let contentHtml=''
+    for(let i=0;i<goods.length;i++){
+        contentHtml+=`<div class='panel'>`
+        for(let j=0;j<goods[i].children.length;j++){
+            let x=goods[i].children[j].newPrice.toString().split('.')[0]
+            let y=goods[i].children[j].newPrice.toString().split('.')[1]
+            console.log(x,y)
+            contentHtml+=`
+                <div>
+                        <img src="${goods[i].children[j].img}" alt="">
+                <div>
+                    <div class="title">${goods[i].children[j].name}</div>
+                    <div class="inventory">
+                        <span>${goods[i].children[j].inventory}</span>
+                        <span>仅剩${goods[i].children[j].number}件</span>
+                    </div>
+                    <div class="price">
+                        <div>
+                            <span>￥${x}</span><span style="font-size:10px;">.${y}</span>
+                            <span>￥${goods[i].children[j].oldPrice}</span>
+                        </div>
+                        <div class="add">+</div>
+                    </div>
+                </div>
+                </div>
+            `
+        }
+        contentHtml+=`</div>`
+    }
+    $('.right_content').append(contentHtml)
+
+
+    $('.left_nav>ul>li:first-child').addClass('active')
+    $('.right_content>.panel:not(:first)').addClass('active')
+    $('.left_nav>ul').on('click','li',function(){
+        $(this).addClass('active').siblings('li').removeClass('active')
+        let index = $(this).index();
+        $('.panel').eq(index).show().siblings('.panel').hide();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>哈哈哈</title>
+    <style>
+        *{
+        	margin: 0;
+        	padding: 0;
+        }
+        #app{
+        	position: relative;
+        	width: 500px;
+        	margin: 0 auto;
+        	text-align: center;
+        	overflow: hidden;
+        }
+        #app div{
+        	position: absolute;
+        	white-space: nowrap;
+        	padding: 3px;
+        	text-align: center;
+        	border: 1px solid transparent
+        }
+    </style>
+</head>
+<body>
+<div class="container" id='app'>
+    <video width="500px" height="340px" controls id='v'>
+    	<source src="http://pgc.cdn.xiaodutv.com/1890622578_2514378657_20170523122443.mp4?authorization=bce-auth-v1%2Fc308a72e7b874edd9115e4614e1d62f6%2F2017-05-23T04%3A26%3A14Z%2F-1%2F%2F67f21c74e69c4d38e7f5a8d36dd9a62ef55b5e866227163216b53785d52860ba&responseCacheControl=max-age%3D8640000&responseExpires=Thu%2C+31+Aug+2017+12%3A26%3A14+GMT&xcode=836bf89d70bcadd87bbbd97a4bffed30f7948e6b526ccb63&time=1533765170&_=1533694839551" type="video/mp4"></source>
+    </video>
+    <p>
+	<input type="text" id='txt'>
+	<input type="button" value="发送弹幕" id='btn'>
+	</p>
+</div>
+
+<script>
+    function random(min,max){
+    	return parseInt(Math.random()*(max-min+1)+min)
+    }
+    function getRandomColor () {
+		const rgb = []
+		for (let i = 0 ; i < 3; ++i){
+			let color = Math.floor(Math.random() * 256).toString(16)
+			color = color.length == 1 ? '0' + color : color
+			rgb.push(color)
+		}
+		return '#' + rgb.join('')
+	}
+    btn.onclick=function(){
+    	let span=document.createElement('div')
+    	let speed=5 //弹幕滚动速度
+    	span.innerHTML=txt.value
+    	app.appendChild(span)
+    	span.style.top=random(1,5)*30+10+'px'
+    	console.log(span.style.top)
+    	span.style.left='500px'
+    	span.style.color=getRandomColor()
+    	span.style.borderColor=getRandomColor()
+    	let timer=setInterval(function(){
+    		span.style.left=parseInt(span.style.left)-speed+'px'
+    		if(parseInt(span.style.left)<(-span.offsetWidth)){
+    			clearInterval(timer)
+    			app.removeChild(span)
+    		}
+    	},80)
+    }
+</script>
+</body>
+</html>
